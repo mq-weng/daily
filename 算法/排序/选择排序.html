@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let arr = [1, 4, 7, 0, 2, 3]
+
+			function sort(arr) {
+				let key;
+				for (let i = 0; i < arr.length - 1; i++) {
+					key = i;
+					for (let j = i + 1; j < arr.length; j++) {
+						if(arr[key] > arr[j]){
+							key = j;
+						}
+					}
+					if(i !== key){
+						[arr[i],arr[key]] = [arr[key],arr[i]]
+					}
+				}
+				return arr
+			}
+			console.log(sort(arr))
+		</script>
+	</body>
+</html>

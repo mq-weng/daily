@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>容器上的属性</title>
+		<style type="text/css">
+			#father {
+				height: 400px;
+				display: flex;
+				/* align-items: space-around; */
+				/* justify-content: center; */
+				/* flex-direction: column; //这个控制项目排列的方向 */
+				background-color: aliceblue;
+				flex-wrap: nowrap;//nowrap会挤在一行，如果超出宽度的话
+			}
+
+			#child1 {
+				background-color: aqua;
+				width: 1000px;
+			}
+
+			#child2 {
+				background-color: antiquewhite;
+				width: 900px;
+			}
+
+			#child3 {
+				background-color: palevioletred;
+				width: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="father">
+			<div id="child1">
+				child1
+			</div>
+			<div id="child2">
+				child2
+			</div>
+			<div id="child3">
+				child3
+			</div>
+		</div>
+	</body>
+</html>

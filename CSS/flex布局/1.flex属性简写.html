@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>flex简写,带单位的就是basis</title>
+		<style type="text/css">
+			#father{
+				display: flex;
+			}
+			#child1{
+				background-color: aqua;
+				flex:0 0 100px;
+			}
+			#child2{
+				background-color: antiquewhite;
+				flex:0 0 200px;
+			}
+			#child3{
+				background-color: palevioletred;
+				flex:1;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<h3>
+			flex-grow: 按比例伸展
+			flex-shink: 按比例压缩
+			flex-base: 默认宽高
+		</h3>
+		<div id="father">
+			<div id="child1">
+				child1
+			</div>
+			<div id="child2">
+				child2
+			</div>
+			<div id="child3">
+				child3
+			</div>
+		</div>
+	</body>
+</html>

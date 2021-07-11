@@ -35,6 +35,41 @@
 				border: 1px solid #5F9EA0;
 				height: 420px;
 				margin-top: 20px;
+				display: flex;
+			}
+			.left{
+				width: 200px;
+				height: 380px;
+				/* border: 1px solid cadetblue; */
+				padding: 20px;
+			}
+			.l-top{
+				height: 300px;
+				background-color: #DB7093;
+			}
+			.l-bottom{
+				margin-top: 20px;
+				display: flex;
+				justify-content: space-between;
+			}
+			.l-b-c{
+				width: 50px;
+				height: 50px;
+				background-color: #DB7093;
+			}
+			.right{
+				width: 480px;
+				/* border: 1px solid cadetblue; */
+				height: 380px;
+				padding: 20px;
+				display: flex;
+				align-items: center; /*注意这里*/
+				flex-wrap: wrap;
+			}
+			.r-c{
+				height: 40px;
+				width: 100%;
+				background-color: #DB7093;
 			}
 		</style>
 	</head>
@@ -48,11 +83,23 @@
 				<div class="h-c h-c-5"></div>
 		</header>
 		<article class="article">
-			<div class="">
+			<div class="left">
+				<div class="l-top"></div>
+				<div class="l-bottom">
+					<div class="l-b-c"></div>
+					<div class="l-b-c" ></div>
+					<div class="l-b-c" ></div>
+				</div>
 				
 			</div>
-			<div class="article">
-				
+			<div class="right">
+				<div class="r-c"></div>
+				<div class="r-c"></div>
+				<div class="r-c"></div>
+				<div class="r-c"></div>
+				<div class="r-c"></div>
+				<div class="r-c"></div>
+				<div class="r-c"></div>
 			</div>
 		</article>
 		</div>

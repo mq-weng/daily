@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+				
+			.container{
+				width: 390px;
+				height: 370px;
+				background-color: beige;
+				padding-top: 250px;
+				box-sizing: border-box;
+			}
+			.bottom{
+				height: 120px;
+				width: 100%;
+				background-color: #DB7093;
+				padding: 10px;
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+			}
+			.b-c{
+				height: 20px;
+				width: 100%;
+				border: 1px solid blueviolet;
+				line-height: 20px;
+			}
+			.b-c-3{
+				height: 30px;
+				display: flex;
+			}
+			.b-c-3-c{
+				display: flex;
+				justify-content: space-between;
+				/* border: 1px solid #333333; */
+				width: 270px;
+				height: 20px;
+				margin-left: auto;
+				margin-right: 10px;
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="top"></div>
+			<div class="bottom">
+				<div class="b-c">
+					标题文字
+				</div>
+				<div class="b-c">具体信息</div>
+				<div class="b-c b-c-3 ">
+					<div style="line-height: 30px;">实际价格</div>
+					<div class="b-c-3-c">
+						<div>￥原价xx.00</div>
+						<div>xx件已售</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

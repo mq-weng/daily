@@ -21,7 +21,8 @@ var S = /** @class */ (function () {
 var s = new S();
 s.date = new Date();
 console.log(s.date.getDate()); //17
-var p1 = { name: "fff" };
+var p1 = { name: "fff" }; //就这两种写法
 var p2 = {};
 p2.name = "p2";
 console.log(p2.name);
+var p3 = { name: "fff" };

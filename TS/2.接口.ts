@@ -28,8 +28,9 @@ console.log(arr[1]);
 
 //类 接口
 interface Student{
-	date: Date;
-	hello(name: string);
+	date?:
+	 Date;
+	hello?(name: string);
 }
 class S implements Student{
 	date: Date;
@@ -50,3 +51,9 @@ let p1 : P = {name:"fff"}; //就这两种写法
 let p2 = <P>{};
 p2.name = "p2"
 console.log(p2.name)
+
+//也可以继承多个接口
+interface P3 extends Person, Student{
+	gender?:boolean;
+}
+let p3:P3 = {name:"fff",}

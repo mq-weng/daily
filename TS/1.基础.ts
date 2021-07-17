@@ -7,6 +7,12 @@ let str: string = `数字 ${arr}`;
 let arr2:[string,number];
 arr2 = ["dsdj",2];
 //枚举
+enum a {
+	num=1,
+	num1,
+	num2
+}
+console.log(a)
 
 //any
 let x : any =  "fjff";

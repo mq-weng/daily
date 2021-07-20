@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<a href="练习2.png" download="练习">下载1</a>
+		<div onclick="download(this)">
+			下载2
+		</div>
+
+		<script >
+			function download (){
+				console.log("jjkkmkm")
+				let a = document.createElement("a");
+				a.href = '练习2.png'
+				a.download = '呼呼.png'
+				document.body.appendChild(a);
+				a.click()
+			}
+		</script>
+	</body>
+</html>

@@ -31,3 +31,15 @@ function test(name, age) {
     }
 }
 test("ggy", 22);
+
+//测试__dirname 和 process.cwd()区别
+//__dirname，  源码所在路径
+// process.cwd() , 当前工作路径
+
+// node 1.基础.js
+console.log(__dirname); //  D:\daily\TS
+console.log(process.cwd()); // D:\daily\TS
+
+//  node TS/1.基础.js
+//  D:\daily\TS
+//  D:\daily

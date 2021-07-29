@@ -3,10 +3,17 @@ var arr = [1, 2, 3];
 var arr1 = [1, 23]; //这是利用数组泛型定义
 //字符串
 var str = "\u6570\u5B57 " + arr;
-//元组(定义了类型和数量的数组)
+//元组(定义了类型的数组)
 var arr2;
 arr2 = ["dsdj", 2];
 //枚举
+var a;
+(function (a) {
+    a[a["num"] = 1] = "num";
+    a[a["num1"] = 2] = "num1";
+    a[a["num2"] = 3] = "num2";
+})(a || (a = {}));
+console.log(a);
 //any
 var x = "fjff";
 x = 12;
@@ -31,15 +38,6 @@ function test(name, age) {
     }
 }
 test("ggy", 22);
-
-//测试__dirname 和 process.cwd()区别
-//__dirname，  源码所在路径
-// process.cwd() , 当前工作路径
-
-// node 1.基础.js
-console.log(__dirname); //  D:\daily\TS
-console.log(process.cwd()); // D:\daily\TS
-
-//  node TS/1.基础.js
-//  D:\daily\TS
-//  D:\daily
+//unknown(弥补)
+var k;
+var num = k;

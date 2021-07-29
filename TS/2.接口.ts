@@ -57,3 +57,5 @@ interface P3 extends Person, Student{
 	gender?:boolean;
 }
 let p3:P3 = {name:"fff",}
+
+

@@ -3,7 +3,7 @@ let arr:number[] = [1,2,3];
 let arr1:Array<number> = [1,23];//这是利用数组泛型定义
 //字符串
 let str: string = `数字 ${arr}`;
-//元组(定义了类型和数量的数组)
+//元组(定义了类型的数组)
 let arr2:[string,number];
 arr2 = ["dsdj",2];
 //枚举

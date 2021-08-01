@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function MyPromise(fn) {
+				this.status = "pending";
+				this.value = null;
+				this.resolveArr = [];
+				this.rejectArr = [];
+				let self = this;
+				let resolved = function(value) {
+					setTimeout(() => {
+						if (this.status == "pendding") {
+							this.status = "resolved";
+							this.value = value;
+							this.resolveArr.forEach((callback) => {
+								callback(this.value)
+							})
+						}
+					}, 0)
+				}
+				let rejected = function(value) {
+					setTimeout(() => {
+						if (this.status == "pendding") {
+							this.status = "resolved";
+							console.log(this.status)
+
+							this.value = value;
+							this.rejectArr.forEach((callback) => {
+								callback(this.value);
+							})
+							console.log(this.status)
+						}
+					}, 0)
+				}
+				try {
+					fn(resolved, rejected);
+				} catch (e) {
+					// 遇到错误时，捕获错误，执行 reject 函数
+					rejected(e);
+				}
+
+
+			}
+			MyPromise.prototype.then = function(onResolved, onRejected) {
+				const self = this;
+				console.lo
+				//由于then的参数是可选的，可能不传参数
+				onResolved =
+					typeof onResolved === "function" ?
+					onResolved :
+					function(value) {
+						return value;
+					};
+
+				onRejected =
+					typeof onRejected === "function" ?
+					onRejected :
+					function(error) {
+						throw error;
+					};
+				return new MyPromise((resolved, rejected) => {
+					console.log(self.status)
+					if (self.status == "pendding") {
+						self.resolveArr.push(resolved);
+						self.rejectArr.push(rejected);
+					}
+					if (self.status == "resolved") {
+
+						const result = onResolved(self.value) //前
+						return result instanceof MyPromise ? result.then(resolved, rejected) : resolved(result); //后
+					}
+					if (self.status == "rejected") {
+						const result = onRejected(self.value)
+						return result instanceof MyPromise ? result.then(resolved, rejected) : rejected(result);
+					}
+				})
+			}
+
+			let p1 = new MyPromise((resolve, reject) => {
+				resolve(2)
+			})
+			p1.then((res) => {
+				console.log(res)
+			})
+		</script>
+	</body>
+</html>

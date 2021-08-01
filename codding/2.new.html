@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+				
+			let myNew = function(fn,...args){
+				let obj = {};
+				obj.__proto__ = fn;
+				let result = fn.call(obj,...args);
+				return result instanceof Object? result : obj; 
+			}
+		</script>
+	</body>
+</html>

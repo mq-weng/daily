@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class myPromise {
+				constructor(fn) {
+					if (typeof(fn) !== 'function') {
+						throw Error(`Promise resolver ${fn} is not a function`)
+					}
+					this.status = "pending";
+					this.data = null;
+					this.resolvedArr = [];
+					this.rejectedArr = [];
+					let _this = this
+
+					function resolved(data) {
+						setTimeout(() => {
+							if (_this.status == 'pending') {
+								_this.status = 'resolved';
+								_this.data = data;
+								_this.resolvedArr.forEach((fn) => fn())
+							}
+						}, 0);
+					}
+
+					function rejected(err) {
+						setTimeout(() => {
+							if (_this.status == 'pending') {
+								_this.status = "rejected";
+								_this.data = err;
+							}
+						}, 0);
+					}
+					fn(resolved, rejected)
+				}
+				then(onResolved, onRejected) {
+					onResolved =
+						typeof onResolved === "function" ?
+						onResolved :
+						function(value) {
+							return value;
+						};
+					
+					onRejected =
+						typeof onRejected === "function" ?
+						onRejected :
+						function(error) {
+							throw error;
+						};
+					let _this = this;
+					if (_this.status == 'resolved') {
+						return new myPromise((resolved, rejected) => {
+							let res = onResolved(_this.data)
+							if (res instanceof myPromise) { //判断res 是不是 myPromise的实例
+								res.then(resolved, rejected)
+							} else {
+								resolved(res);
+							}
+						})
+					}
+					if (_this.status == 'rejected') {
+						return new myPromise((resolved, rejected) => {
+							let res = onResolved(_this.data)
+							if (res instanceof myPromise) { //判断res 是不是 myPromise的实例
+								res.then(resolved, rejected)
+							} else {
+								resolved(res);
+							}
+						})
+					}
+					if (_this.status == 'pending') {
+						return new myPromise((resolved, rejected) => {
+							_this.resolvedArr.push(((onResolved) =>
+								() => {
+									let res = onResolved(_this.data)
+									if (res instanceof myPromise) {
+										res.then(resolved, rejected)
+									} else {
+										resolved(res)
+									}
+
+								})(onResolved))
+							_this.rejectedArr.push(((onRejected) =>
+								() => {
+									let res = onRejected(_this.data)
+									if (res instanceof myPromise) {
+										res.then(resolved, rejected)
+									} else {
+										resolved(res)
+									}
+								}
+							)(onRejected))
+						})
+					}
+				}
+			}
+			
+			let p1 = new myPromise((resolve, reject) => {
+				console.log("1");
+				resolve(2)
+			})
+			p1.then().then((res) => {console.log(res)})
+		</script>
+	</body>
+</html>

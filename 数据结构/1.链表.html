@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function listNode(val){
+				this.value = val;
+				this.next = null;
+			}
+			let node1 = new listNode(1);
+			node1.next = new listNode(2);
+			let node2 = node1.next;
+			//注意不能直接用node2,得用next才能找到
+			//插入新节点
+			let node0 = new listNode(0);
+			node0.next = node1.next;
+			node1.next = node0
+			
+			//删除nod0
+			node1.next = node0.next;
+		</script>
+	</body>
+</html>

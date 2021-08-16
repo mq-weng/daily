@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let arr = [{name: "huhu", age: 12},{name: "qq", age:223}]
+			function fn(arr){
+				let obj = {};
+				let key = arr.map((item) => {
+					return item.name;
+				})
+				arr.forEach((item,index) => {
+					obj[key[index]] = item;
+				})
+				return obj;
+			}
+			let obj = fn(arr)
+			console.log(obj)
+		</script>
+	</body>
+</html>

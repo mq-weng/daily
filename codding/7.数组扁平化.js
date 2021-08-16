@@ -20,3 +20,5 @@ let fn2 = function(arr) {
 	return res;
 }
 console.log(fn2(arr))
+
+console.log(Object.prototype.toString.call(arr))

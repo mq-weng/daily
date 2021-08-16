@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//1.  Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。
+			let obj1 = {
+				1: "hahha"
+			}
+			console.log(Object.assign({}, "aaa", "bbb")) // 注意key名重复，后边覆盖前面
+			//字符串的包装对象，有可枚举属性
+			console.log(Object("aaa")) //// {0: "a", 1: "b", 2: "c", length: 3, [[PrimitiveValue]]: "abc"}
+			console.log(Object.assign(obj1, 1))
+
+			//2. 浅层的深拷贝
+			let father = {
+				name: "huh",
+				child: {
+					name: "你是who"
+				}
+			}
+			let father1 = Object.assign({}, father);
+			father1.name = "niu"
+			father1.child.name = "穷哈"
+			console.log(father)
+			// console.log(father1)   // {child: {name: "穷哈"} , name: "huh" }
+			
+			//3. 合并对象，相同的key后边覆盖前边
+			let merge = {
+				name: "美女",
+				sex: "女"
+			}
+			Object.assign(merge,{sex: "男"})
+			// console.log(merge)
+		</script>
+	</body>
+</html>

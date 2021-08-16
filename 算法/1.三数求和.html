@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let arr = [-1, 0, 1, 2, -1, -4];
+
+			function fn(arr) {
+				arr.sort((a, b) => {
+					return a - b
+				})
+				let len = arr.length;
+				console.log(arr)
+				let res = [];
+				let left;
+				let right;
+				for (let i = 0; i < len - 2; i++) {
+					left = i + 1;
+					right = len - 1;
+					if (arr[i-1] == arr[i]) { //去重
+						continue;
+					}
+					console.log(i)
+					while (left < right) {
+						if (arr[i] + arr[left] + arr[right] > 0) {
+							right--;
+							while (arr[right] == arr[right + 1]) {
+								right--;
+							}
+						} else if (arr[i] + arr[left] + arr[right] < 0) {
+							left++;
+							while (left < right && arr[left] == arr[left - 1]) {
+								left++;
+							}
+						} else {
+							res.push([arr[i], arr[left], arr[right]]);
+							left++;
+							right--;
+							while (left < right && arr[left] == arr[left - 1]) {
+								left++;
+							}
+							while (left < right &&arr[right] == arr[right + 1]) {
+								right--;
+							}
+						}
+					}
+
+				}
+				return res
+			}
+			console.log(fn(arr))
+		</script>
+	</body>
+</html>

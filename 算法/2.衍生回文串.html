@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。
+			function isHuiwen(str) { //判断是否回文串
+				str1 = str.split("").reverse().join("");
+				return str1 === str
+			}
+
+			function test(str) {
+				let left = 0;
+				let right = str.length - 1;
+				while (left < right) {
+					if (str[left] === str[right]) {
+						left++;
+						right--;
+					} else {
+						if (isHuiwen(str.substring(left + 1, right+1))) {
+							return true
+						} else if (isHuiwen(str.substring(left, right))) {
+							console.log(str.substring(left, right))
+							return true;
+						} else {
+							return false;
+						}
+					}
+				}
+				return true;
+			}
+			let str = "pooep"
+			console.log(test(str))
+		</script>
+	</body>
+</html>

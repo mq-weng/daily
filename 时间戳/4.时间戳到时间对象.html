@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+		 // 1、
+			let time = new Date(1629287942000);
+			console.log(time);
+			//这个要是1位数还得在前面拼上0
+			console.log(
+			time.getFullYear() + "-" + (time.getMonth()  + 1)+ "-" + time.getDate() + " " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
+			)
+			
+		//2、
+		console.log(time.toLocaleDateString()) //  2021/8/18
+		console.log(time.toJSON()) //2021-08-18T11:59:02.000Z
+		console.log(time.toISOString()) //2021-08-18T11:59:02.000Z
+		</script>
+	</body>
+</html>

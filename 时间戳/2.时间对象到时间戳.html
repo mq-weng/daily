@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let date = new Date("2021-04-05 11:34:12.11")
+			console.log(date);
+			console.log(date.getTime())  //1617593652110
+			console.log(date.valueOf())  //1617593652110
+			console.log(Number(date)) //1617593652110
+			console.log(Date.parse(date))  //1617593652000
+			
+			/*ISO-8601标准格式(这个时间用的是utc,会比北京时间早8个小时)
+			2018-04-08T11:38:39+08:00   日期用“-”相隔，与时间用“T”连接
+			2018-04-08T11:38:39Z     Z代表UTC时间，Z也可写成00:00
+			*/
+		   console.log(new Date(2021-08-12T11:38:39+08:00));
+		   
+		</script>
+	</body>
+</html>

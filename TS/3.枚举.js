@@ -1,13 +1,6 @@
-//数字枚举
-var Num;
-(function (Num) {
-    Num[Num["one"] = 0] = "one";
-    Num[Num["two"] = 1] = "two";
-    Num[Num["three"] = 2] = "three";
-})(Num || (Num = {}));
-var num = Num.two;
-console.log(Num[0]);
-Num.two = 4;
+// 常量枚举会在编译阶段被删除
+var myColors = [0 /* Red */, 1 /* Yellow */, 2 /* Blue */];
+// Num.two = 4;   报错，enum是只读属性
 //字符枚举
 var Str;
 (function (Str) {
@@ -27,3 +20,16 @@ var Enum;
     Enum[Enum["E"] = 8] = "E";
     Enum[Enum["F"] = 9] = "F";
 })(Enum || (Enum = {}));
+var Char;
+(function (Char) {
+    // const member 常量成员：在编译阶段被计算出结果
+    Char[Char["a"] = 0] = "a";
+    Char[Char["b"] = 0] = "b";
+    Char[Char["c"] = 4] = "c";
+    // computed member 计算成员：表达式保留到程序的执行阶段
+    Char[Char["d"] = Math.random()] = "d";
+    Char[Char["e"] = '123'.length] = "e";
+    // 紧跟在计算成员后面的枚举成员必须有初始值
+    Char[Char["f"] = 1] = "f";
+    Char[Char["g"] = 2] = "g";
+})(Char || (Char = {}));

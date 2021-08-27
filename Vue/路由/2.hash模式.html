@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hash路由</title>
+</head>
+
+<body>
+    <a href="#/home">总的</a>
+    <a href="#/child1">child1</a>
+    <a href="#/child2">child2</a>
+    <button onclick="child3()">child3</button>
+    <div id="routerView"></div>
+    <textarea name="" id="text" cols="30" rows="10" onblur="change(value)"></textarea>
+    <script>
+        let view = document.getElementById("routerView");
+        let hashArr = [];
+        let fn = function () {
+            switch (location.hash) {
+                case "#/child1":
+                    view.innerHTML = "child1";
+                    break;
+                case "#/child2":
+                    view.innerHTML = "child2";
+                    break;
+                case "#/child3":
+                    view.innerHTML = "child3";
+                    break;
+                case "#/home":
+                    view.innerHTML = "home";
+                    break;
+            }
+        }
+        //由于第一次加载不触发onhashchange
+        window.onload = fn
+        //onhashchange监听hash变化
+        window.onhashchange = fn
+
+        function child3() {
+            location.hash = "#/child3";
+        }
+        //测试xss
+        function change(value){
+            view.innerHTML = value;
+            
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue路由原理</title>
+</head>
+
+<body>
+  <a href="#home">home</a>
+  <div id="container"></div>
+  <script>
+    /*
+      hash通过window.onhashchange监听hash变化
+H5 history通过history.pushState()向浏览器历史添加了一个记录，通过onpopstate监听浏览器前进后退
+H5 history需要后端支持
+  */
+
+    //hash模式
+    window.onhashchange = function (event) {
+      console.log(event);
+      console.log(location.hash)
+      console.log(location);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			/*
+        真题描述： 设计一个支持以下两种操作的数据结构：
+        void addWord(word)
+        bool search(word)
+        search(word) 可以搜索文字或正则表达式字符串，字符串只包含字母 . 或 a-z 。
+        . 可以表示任何一个字母。
+        */
+
+			//构造函数
+			const Word = function() {
+				this.map = new Map()
+			}
+			//添加
+			Word.prototype.addWord = function(word) {
+				let len = word.length;
+				if (this.map.get(len)) {
+					let arr = this.map.get(len);
+					arr.push(word)
+					this.map.set(len, arr);
+				} else {
+					this.map.set(len, [word]);
+				}
+			}
+			//检索
+			Word.prototype.search = function(word) {
+				let len = word.length;
+				let arr = this.map.get(len);
+				if (arr) {
+					return word.indexOf(".") > -1 ?
+						arr.some((elem) => {
+							return new RegExp(word).test(elem)
+						}) 
+						:
+						arr.includes(word)
+
+				} else {
+					return false
+				}
+			}
+
+			let obj = new Word();
+			// obj.addWord("ssssss");
+			// obj.addWord("ss");
+			// obj.addWord("12324");
+			// obj.addWord("s1")
+			// console.log(obj.map)
+			// let bool = obj.search("sssss");
+			// console.log(bool)
+			obj.addWord("bad")
+			obj.addWord("dad")
+			obj.addWord("mad")
+			console.log(obj.search("pad")) //-> false
+			console.log(obj.search("bad")) //-> true
+			console.log(obj.search(".ad")) //-> true
+			console.log(obj.search("b..") )//-> true
+		</script>
+	</body>
+
+</html>

@@ -15,12 +15,15 @@
 				注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换。
 			在任何情况下，若函数不能进行有效的转换时，请返回 0。
 			*/
+		   
+		   /* 正则的？ 匹配 0 个或 1 个问号前的*/
+		   //  1
 			let fn = function(str) {
 				let num;
 				//去掉空格
 				num = str.replace(/\s*/, "");
 				//匹配数字
-				num = Number(num.match(/[-+\d]\d*/));
+				num = Number(num.match(/[-+\d]?\d*/));
 				num = num ? num : 0;
 				//确定界限
 				let max = Math.pow(2, 31) - 1;
@@ -33,7 +36,44 @@
 					return num;
 				}
 			}
-			console.log(fn("   -91283472332"))
+			console.log(fn("     -91283472332"));
+			
+			//  2
+			// 入参是一个字符串
+			const myAtoi = function(str) {
+			    // 编写正则表达式
+			    const reg = /\s*([-\+]?[0-9]*).*/
+			    // 得到捕获组
+			    const groups = str.match(reg)
+				console.log(groups)
+			    // 计算最大值
+			    const max = Math.pow(2,31) - 1
+			    // 计算最小值
+			    const min = -max - 1
+			    // targetNum 用于存储转化出来的数字
+			    let targetNum = 0
+			    // 如果匹配成功
+			    if(groups) {
+			        // 尝试转化捕获到的结构
+			        targetNum = +groups[1]
+			        // 注意，即便成功，也可能出现非数字的情况，比如单一个'+'
+			        if(isNaN(targetNum)) {
+			            // 不能进行有效的转换时，请返回 0
+			            targetNum = 0
+			        }
+			    }
+			    // 卡口判断
+			    if(targetNum > max) {
+			        return max
+			    } else if( targetNum < min) {
+			        return min
+			    }
+			    // 返回转换结果
+			    return targetNum
+			};
+			console.log(myAtoi("     p-91283472332"))
+			
+		
 		</script>
 	</body>
 </html>

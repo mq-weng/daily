@@ -16,14 +16,14 @@
 			在任何情况下，若函数不能进行有效的转换时，请返回 0。
 			*/
 		   
-		   /* 正则的？ 匹配 0 个或 1 个问号前的*/
+		   /* 正则的？ 匹配 以0 个或 1 个问号前的  *开头* 的字符*/
 		   //  1
 			let fn = function(str) {
 				let num;
 				//去掉空格
 				num = str.replace(/\s*/, "");
 				//匹配数字
-				num = Number(num.match(/[-+\d]?\d*/));
+				num = Number(num.match(/^[-+\d]\d*/));
 				num = num ? num : 0;
 				//确定界限
 				let max = Math.pow(2, 31) - 1;
@@ -36,7 +36,7 @@
 					return num;
 				}
 			}
-			console.log(fn("     -91283472332"));
+			console.log(fn("     ++91283472332"));
 			
 			//  2
 			// 入参是一个字符串
@@ -73,7 +73,6 @@
 			};
 			console.log(myAtoi("     p-91283472332"))
 			
-		
 		</script>
 	</body>
 </html>

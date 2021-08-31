@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>去重</title>
+</head>
+
+<body>
+    <script>
+        //给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
+        let Link = function (data) {
+            this.next = null;
+            this.data = data;
+        }
+        let l1 = new Link(1);
+        let head1 = l1 //头指针
+        l1.next = new Link(1);
+        l1.next.next = new Link(2);
+        l1.next.next.next = new Link(2);
+        l1.next.next.next.next = new Link(3);
+        console.log(head1)
+
+        let fn = function (l1) {
+            let head = l1
+            while (l1 && l1.next) {
+                if (l1.data == l1.next.data) {
+                    l1.next = l1.next.next;
+                } else {
+                    l1 = l1.next  //记得下移
+                }
+            }
+            return head
+        }
+        console.log(fn(head1))
+    </script>
+</body>
+
+</html>

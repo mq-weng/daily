@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let p = new Promise((resolev, reject) => {
+            setTimeout(() => {
+                resolev(1)
+            }, 0)
+        })
+        p.then((res) => {
+            console.log(res)
+        });
+       // promise用法
+        Promise.all([23, p, 34]).then((res) => {
+            console.log(res)
+        })
+        //模拟
+        let my = function (proArr) {
+            if(!(proArr instanceof Array)){
+                throw new TypeError("不是数组")
+            }
+            return new Promise((resolve, reject) => {
+                let count = 0;
+                let arr = [];
+                for (let i = 0; i < proArr.length; i++) {
+                    Promise.resolve(proArr[i]).then((res) => {
+                        // arr.push(res)
+                        arr[i] = res
+                        count++;
+                        if (count == proArr.length) {
+                            resolve(arr)
+                        }
+                    }, (error) => {
+                        reject(error)
+                    })
+                }
+            });
+        }
+        my([23, p, 34]).then((res) => {
+            console.log(res)
+        })
+        my(11)
+
+    </script>
+</body>
+
+</html>

@@ -21,40 +21,24 @@
 		l1.next.next.next.next = new Link(3);
 		console.log(head1)
 
-		/**
-		 * @param {ListNode} head
-		 * @return {ListNode}
-		 */
-		const deleteDuplicates = function (head) {
-			// 极端情况：0个或1个结点，则不会重复，直接返回
-			if (!head || !head.next) {
-				return head
-			}
-			// dummy 登场
-			let dummy = new Link()
-			// dummy 永远指向头结点
-			dummy.next = head
-			// cur 从 dummy 开始遍历
-			let cur = dummy
-			// 当 cur 的后面有至少两个结点时
+
+		function deleteDuplicates(l1) {
+			let dummy = new Link(); //这个是为了保证前驱节点存在
+			dummy.next = l1;
+			let cur = dummy;
 			while (cur.next && cur.next.next) {
-				// 对 cur 后面的两个结点进行比较
-				if (cur.next.val === cur.next.next.val) {
-					// 若值重复，则记下这个值
-					let val = cur.next.val
-					// 反复地排查后面的元素是否存在多次重复该值的情况
-					while (cur.next && cur.next.val === val) {
-						// 若有，则删除
-						cur.next = cur.next.next
+				if (cur.next.data == cur.next.next.data) {
+					let link = cur.next.data; //保留相等的数据
+					cur.next = cur.next.next.next;
+					while(cur.next && cur.next.data == link){
+						cur.next = cur.next.next;
 					}
 				} else {
-					// 若不重复，则正常遍历
-					cur = cur.next
+					cur = cur.next //指针后移
 				}
 			}
-			// 返回链表的起始结点
-			return dummy.next;
-		};
+			return dummy.next
+		}
 
 		console.log(deleteDuplicates(head1))
 	</script>

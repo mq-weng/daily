@@ -1,39 +1,63 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-		<script type="text/javascript">
-			//给定一个排序链表，删除所有含有重复数字的结点，只保留原始链表中 没有重复出现的数字。
-			let Link = function (data) {
-			    this.next = null;
-			    this.data = data;
-			}
-			let l1 = new Link(1);
-			let head1 = l1 //头指针
-			l1.next = new Link(1);
-			l1.next.next = new Link(2);
-			l1.next.next.next = new Link(2);
-			l1.next.next.next.next = new Link(3);
-			console.log(head1)
-			
-			let fn = function(l1){
-				let head = l1;
-				while(l1 && l1.next){
-					console.log(l1.data);
-					console.log(l1)
-					if(l1.data == l1.next.data){
-						l1 = l1.next.next;
-					}else{
-						l1 = l1.next
-					}
-				}
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		//给定一个排序链表，删除所有含有重复数字的结点，只保留原始链表中 没有重复出现的数字。
+		let Link = function (data) {
+			this.next = null;
+			this.data = data;
+		}
+		let l1 = new Link(1);
+		let head1 = l1 //头指针
+		l1.next = new Link(1);
+		l1.next.next = new Link(2);
+		l1.next.next.next = new Link(2);
+		l1.next.next.next.next = new Link(3);
+		console.log(head1)
+
+		/**
+		 * @param {ListNode} head
+		 * @return {ListNode}
+		 */
+		const deleteDuplicates = function (head) {
+			// 极端情况：0个或1个结点，则不会重复，直接返回
+			if (!head || !head.next) {
 				return head
 			}
-			
-			console.log(fn(head1))
-		</script>
-	</body>
+			// dummy 登场
+			let dummy = new Link()
+			// dummy 永远指向头结点
+			dummy.next = head
+			// cur 从 dummy 开始遍历
+			let cur = dummy
+			// 当 cur 的后面有至少两个结点时
+			while (cur.next && cur.next.next) {
+				// 对 cur 后面的两个结点进行比较
+				if (cur.next.val === cur.next.next.val) {
+					// 若值重复，则记下这个值
+					let val = cur.next.val
+					// 反复地排查后面的元素是否存在多次重复该值的情况
+					while (cur.next && cur.next.val === val) {
+						// 若有，则删除
+						cur.next = cur.next.next
+					}
+				} else {
+					// 若不重复，则正常遍历
+					cur = cur.next
+				}
+			}
+			// 返回链表的起始结点
+			return dummy.next;
+		};
+
+		console.log(deleteDuplicates(head1))
+	</script>
+</body>
+
 </html>

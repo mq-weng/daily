@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //给定一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+        let Link = function (data) {
+			this.next = null;
+			this.data = data;
+		}
+		let l1 = new Link(1);
+		let head1 = l1 //头指针
+		l1.next = new Link(2);
+		l1.next.next = new Link(3);
+		l1.next.next.next = new Link(4);
+		l1.next.next.next.next = new Link(5);
+		console.log(head1)
+
+
+        let fn = function(head, n){
+            let dummy  =new Link();
+            dummy.next = head;
+            let fast = dummy;
+            let last = dummy;
+            let num = 0;
+            while(num < n){
+                fast = fast.next;
+                num++;
+            }
+            while(fast.next){
+                fast = fast.next;
+                last = last.next;
+                console.log(last)
+                console.log(fast)
+            }
+            last = last.next.next;
+            return dummy.next;
+        }
+        console.log(fn(l1, 2))
+    </script>
+</body>
+</html>

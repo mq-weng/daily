@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//反转从位置 m 到 n 的链表。请使用一趟扫描完成反转
+			let Link = function (data) {
+			    this.next = null;
+			    this.data = data;
+			}
+			let l1 = new Link(1);
+			let head1 = l1 //头指针
+			l1.next = new Link(2);
+			l1.next.next = new Link(3);
+			l1.next.next.next = new Link(4);
+			l1.next.next.next.next = new Link(5);
+			l1.next.next.next.next.next = new Link();
+			console.log(head1)
+			
+			
+		</script>
+	</body>
+</html>

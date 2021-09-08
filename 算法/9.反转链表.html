@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//定义一个函数，输入一个链表的头结点，反转该链表并输出反转后链表的头结点。
+			let Link = function (data) {
+			    this.next = null;
+			    this.data = data;
+			}
+			let l1 = new Link(1);
+			let head1 = l1 //头指针
+			l1.next = new Link(2);
+			l1.next.next = new Link(3);
+			l1.next.next.next = new Link(4);
+			l1.next.next.next.next = new Link(5);
+			l1.next.next.next.next.next = new Link();
+			console.log(head1)
+			//这个用了三个指针，好多鱼
+			function fn(head){
+				let dummy = new Link();
+				dummy.next = head;
+				let cur = dummy.next;
+				let pre = dummy;
+				let nex = dummy.next.next;
+				while(cur.next){
+					cur.next = pre;
+					pre = cur;
+					cur = nex;
+					nex = nex.next;
+				}
+				return pre
+			}
+			//用下面这种方式存一下就好了
+			function fn1(head){
+				let cur = head;
+				let pre = null;
+				while(cur.next){
+					let x = cur.next; //存一下
+					cur.next = pre;
+					pre = cur;
+					cur = x;
+				}
+				return pre
+			}
+			console.log(fn(head1))
+		</script>
+	</body>
+</html>

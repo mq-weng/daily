@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app" >
+        <div v-html = "message"></div>
+        <div style="white-space: pre-wrap;">{{text}}</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                message:'Hello Vue!\n我是勇哥',
+                text:"dd\ndhff\ndd"
+            },
+            created () {
+                //1  显示换行的话,用v-html绑定
+                this.message= this.message.replace(/\n/g,"<br/>")
+                //  2.就是用style，white-space: pre-wrap
+               console.log(this.message)
+            }
+        })
+    </script>
+</body>
+
+</html>

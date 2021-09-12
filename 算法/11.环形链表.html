@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//给定一个链表，判断链表中是否有环。
+			let Link = function(data) {
+				this.next = null;
+				this.data = data;
+			}
+			let l1 = new Link(1);
+			let head1 = l1 //头指针
+			l1.next = new Link(2);
+			l1.next.next = new Link(3);
+			l1.next.next.next = new Link(4);
+			l1.next.next.next.next = l1;
+			console.log(head1)
+			
+			// 1
+			function fn(head){
+				let dummy = new Link();
+				dummy.next = head;
+				let cur = head;
+				while(cur.next){
+					if(cur === dummy.next){
+						return "存在"
+					}else{
+						cur = cur.next;
+					}
+				}
+				return "不存在"
+			}
+			console.log(fn(head1))
+			
+			//2 快慢指针
+		</script>
+	</body>
+</html>

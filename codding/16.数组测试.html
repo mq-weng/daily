@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	<script type="text/javascript">
+		let arr = ['name','age','name'];
+		let obj = {
+			name:{
+				age:{
+					name:"ooo"
+				},
+				name:"qq"
+			}
+		}
+		let num = arr.reduce((total,item) => {
+			 return total[item]
+		},obj)
+		console.log(num)
+		for(item in arr){
+			console.log(arr[item])
+		}
+		for(item of arr){
+			console.log(item)
+		}
+		
+		let arr1 = [1,2,3];
+		//arr1.slice(1,2);//[1,2,3]
+		// arr1.splice(0,2,7)//[7,3]
+		// arr1.reverse()//[3,2,1]
+		// arr1.fill(7,0)
+		arr1.copyWithin(2,1)
+		
+		console.log(arr1)
+	</script>
+	</body>
+</html>

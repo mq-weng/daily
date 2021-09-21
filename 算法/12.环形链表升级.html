@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//给定一个链表，返回链表开始入环的第一个结点。 如果链表无环，则返回 null。
+			let Link = function(data) {
+				this.next = null;
+				this.data = data;
+			}
+			let l1 = new Link(1);
+			let head1 = l1 //头指针
+			l1.next = new Link(2);
+			l1.next.next = new Link(3);
+			l1.next.next.next = new Link(4);
+			// l1.next.next.next.next = l1;
+			console.log(head1)
+			
+			function fn(head){
+				while(head.next){
+					if(head.flag){
+						return head.data
+					}else{
+						head.flag = true;
+						head = head.next
+					}
+				}
+				return "wu"
+			}
+			console.log(fn(head1))
+		</script>
+	</body>
+</html>

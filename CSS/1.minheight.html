@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#container{
+				background-image: url(img/R-C.jpg);
+				background-repeat: no-repeat;
+				min-height: 200px; // 如过不知道需要多大的容器，又怕内容超出容器可以这么用
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			
+		</div>
+		<script type="text/javascript">
+			let con = document.getElementById('container');
+			let frag = document.createDocumentFragment();
+			// let p = document.createElement('p');
+			// p.innerHTML = 'hah';
+			for(let i = 0; i < 10; i++){
+				var p = document.createElement('p');
+				p.innerHTML = 'hah';
+				frag.appendChild(p);
+			}
+			con.appendChild(frag);
+		</script>
+	</body>
+</html>

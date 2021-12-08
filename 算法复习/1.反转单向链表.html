@@ -1,0 +1,40 @@
+<!DOCTYPE >
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let Link = function(data) {
+				this.next = null;
+				this.data = data;
+			}
+			let l1 = new Link(1);
+			let head1 = l1 //头指针
+			l1.next = new Link(2);
+			l1.next.next = new Link(3);
+			l1.next.next.next = new Link(4);
+			l1.next.next.next.next = new Link(5);
+			l1.next.next.next.next.next = new Link();
+			console.log(head1)
+			
+			function reverse(node) {
+				let first = new Link();
+				first.next = node;
+				let now = node;
+				let nex = null; // 存储下一个
+				while (now.next) {
+					nex = now.next;
+					now.next = first;
+					first = now;
+					now = nex;
+					// console.log(first)
+				}
+				
+				return first
+			}
+			console.log(reverse(head1))
+		</script>
+	</body>
+</html>

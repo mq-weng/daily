@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+		
+			function fn(str){
+				let stack = [];
+				let obj = {
+					'[': ']',
+					'{': '}',
+					'(': ')'
+				}
+				let len = str.length;
+				str = str.replace(/\s/g,'')
+				for(let i = 0; i < len; i++){
+					if(str[i] == '[' || str[i] == '{' || str[i] == '('){
+						stack.push(obj[str[i]])
+					}else if(stack.pop() !== str[i]){ // 空数组pop是undefined
+						return false;
+					}
+				};
+				return !stack.length;
+			}
+			let str = '[[  ]]'
+			console.log(fn(str))
+		</script>
+	</body>
+</html>

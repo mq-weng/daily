@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class MinStack {
+				constructor() {
+					this.stack = [];
+					this.minstack = [];
+				}
+				push(arg) {
+					this.stack.push(arg);
+					// 注意递减辅助栈为空的时候直接添加
+					if (this.minstack.length == 0 || arg < this.minstack[this.minstack.length - 1]) {
+						this.minstack.push(arg)
+					}
+					return this.stack
+				};
+				pop() {
+					if (this.stack.pop() == this.minstack[this.minstack.length - 1]) {
+						this.minstack.pop()
+					}
+				};
+				getMin() {
+					return this.minstack[this.minstack.length - 1]
+				};
+				top() { 
+					if (this.stack.length > 0) return this.stack[this.stack.length - 1]
+					else {
+						return ''
+					}
+				}
+			}
+
+			let minStack = new MinStack();
+			minStack.push(-2);
+			minStack.push(0);
+			minStack.push(-3);
+			console.log(minStack.getMin()); // --> 返回 -3.
+			minStack.pop();
+			console.log(minStack.getMin()); // --> 返回 -2.
+		</script>
+	</body>
+</html>

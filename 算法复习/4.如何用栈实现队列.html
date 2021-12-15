@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class MyQueue {
+				constructor() {
+				    this.stack = [];
+					this.stack1 = []; // 辅助栈
+				}
+				push(arg){
+					this.stack.push(arg);
+				}
+				pop(){
+					if(this.stack1.length == 0){
+						while(this.stack.length !== 0){
+							this.stack1.push(this.stack.pop())
+						}
+					}
+					return this.stack1.pop();
+				}
+			}
+			let queue = new MyQueue();
+			queue.push(12);
+			queue.push(13);
+			queue.push(14);
+			console.log(queue.pop());
+			console.log(queue.pop())
+			console.log(queue.pop())
+		</script>
+	</body>
+</html>

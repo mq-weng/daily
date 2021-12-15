@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 双端队列就是允许在队列的两端进行插入和删除的队列。
+
+			/*
+			题目描述：给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。
+			*/
+			// 1 双指针
+			// 2双端队列：多了辅助性的双端队列，空间换时间
+			function move(arr, k) {
+				let queue = []; // 存储的是索引,排除值相等的情况
+				let len = arr.length;
+				let res = [];
+				for (let i = 0; i < len; i++) {
+					// 维护递减栈
+					while(queue.length && arr[queue[queue.length - 1]] < arr[i]){
+						queue.pop();
+					}
+					queue.push(i);
+					while(queue.length && queue[0] <= i - k ){
+						console.log(arr[queue[0]])
+						queue.shift();
+					}
+					// 结果数组
+					if(i - k + 1 >= 0){
+						res.push(arr[queue[0]])
+					}
+				}
+				return res
+			}
+			let arr = [9,8,7,0,2,3,7,6,6,7,6];
+			console.log(move(arr,3))
+		</script>
+	</body>
+</html>

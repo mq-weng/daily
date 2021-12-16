@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.container{
+				background-color: #5F9EA0;
+				width:  500px;
+				height: 500px;
+				margin: 10px 0;
+			}
+			.inner{
+				text-align: center;
+				background: blue;
+				color: #fff;
+				padding: 25% 0; // 相当于父元素宽度的一半，子元素宽度继承父元素
+				height: 0;
+			}
+			
+			/* 大小为父元素宽度一半的正方形 */
+			.square{
+				width: 50%;
+				background-color: #8A2BE2;
+				padding-bottom: 50%;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<!-- css div 垂直水平居中，并完成 div 高度永远是宽度的一半（宽度可以不指定） -->
+		<div class="container">
+			<div class="inner">
+				怒地
+			</div>
+		</div>
+		
+		<!-- 大小为父元素宽度一半的正方形 -->
+		<div class="container">
+			<div class="square">
+				
+			</div>
+		</div>
+		
+	</body>
+</html>

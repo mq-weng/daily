@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#container {
+				width: 40px;
+				height: 20px;
+				border-radius: 10px;
+				border: 1px solid #333333;
+			}
+
+			.child1 {
+				width: 20px;
+				height: 20px;
+				border-radius: 10px;
+				background-color: #DB7093;
+				transition: margin-left 0.5s;
+			}
+
+			.child2 {
+				width: 20px;
+				height: 20px;
+				border-radius: 10px;
+				background-color: #DB7093;
+				margin-left: 20px;
+				transition: margin-left 0.5s;
+			}
+
+			#container:hover {
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div id="child" class="child1">
+			</div>
+		</div>
+		<script type="text/javascript">
+			let con = document.getElementById("container");
+			let child = document.getElementById("child");
+			con.onclick = function() {
+				if (child.className == "child1") {
+					child.className = 'child2'
+				} else {
+					child.className = 'child1'
+				}
+			}
+		</script>
+	</body>
+</html>

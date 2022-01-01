@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/*
+		最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
+		*/
+			let res = /^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?=.*[0-9])/.test("fkFK12hhh=");
+			console.log(res)
+			//正整数正则
+			var posPattern = /^d+$/;
+			//负整数正则
+			var negPattern = /^-d+$/;
+			//整数正则
+			var intPattern = /^-?d+$/;
+			//输出 true
+			console.log(posPattern.test("42"));
+			//输出 true
+			console.log(negPattern.test("-42"));
+			//输出 true
+			console.log(intPattern.test("-42"));
+			//正数正则
+			console.log(/^\d+\.?\d+$/.test("66.6"))
+		</script>
+	</body>
+</html>

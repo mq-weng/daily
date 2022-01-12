@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let n = 6;
+			let m = 9;
+			let arr = [6,7,3,4,9,6];
+			// arr = arr.split(" ");
+			// arr = arr.map((item) => {
+			//     return parseInt(item)
+			// })
+			for(let i = 0; i < m; i++){
+			    arr.sort((a,b) => {
+			        return a - b
+			    })
+				console.log(arr)
+			    arr[0] = arr[0] + 1;
+			}
+			arr.sort((a,b) => {
+			        return a - b
+			    })
+			console.log(arr[0])
+		</script>
+	</body>
+</html>

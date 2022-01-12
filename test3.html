@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fn(num1, num2) {
+            let arr1 = num1.toString().split('').reverse();
+            let arr2 = num2.toString().split('').reverse();
+            arr1.fill(0)
+            while (arr1.length < arr2.length) {
+                arr1.push(0)
+            }
+            while (arr1.length > arr2.length) {
+                arr2.push(0)
+            }
+            arr1.push(0)
+            for (let i = 0; i < arr2.length; i++) {
+                arr1[i] = Number(arr1[i]);
+                arr2[i] = Number(arr2[i])
+                if (arr1[i] + arr2[i] > 9) {
+                    arr1[i + 1] = Number(arr1[i+1]) + 1;
+                    arr1[i] = (arr1[i] + arr2[i])-10
+                    console.log(arr1[i+1]);
+                } else {
+                    arr1[i] = arr1[i] + arr2[i]
+                }
+            }
+            arr1 = arr1.reverse().join('').replace(/^0/,'')
+            return arr1
+        }
+    </script>
+</body>
+
+</html>

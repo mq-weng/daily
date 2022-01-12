@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			const root = {
+				val: "A",
+				left: {
+					val: "B",
+					left: {
+						val: "D"
+					},
+					right: {
+						val: "E"
+					}
+				},
+				right: {
+					val: "C",
+					right: {
+						val: "F"
+					}
+				}
+			};
+			let fn = function(root) {
+				let queue = [];
+				queue.push(root);
+				while (queue.length) {
+					let obj = queue.shift();
+					console.log(obj.val);
+					if (obj.left) queue.push(obj.left);
+					if (obj.right) queue.push(obj.right);
+				}
+			}
+			fn(root)
+		</script>
+	</body>
+</html>

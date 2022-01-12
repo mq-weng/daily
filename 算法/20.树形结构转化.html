@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let arr = [{
+					id: 1,
+					name: '部门A',
+					parentId: 0
+				},
+				{
+					id: 2,
+					name: '部门B',
+					parentId: 0
+				},
+				{
+					id: 3,
+					name: '部门C',
+					parentId: 1
+				},
+				{
+					id: 4,
+					name: '部门D',
+					parentId: 1
+				},
+				{
+					id: 5,
+					name: '部门E',
+					parentId: 2
+				},
+				{
+					id: 6,
+					name: '部门F',
+					parentId: 3
+				},
+				{
+					id: 7,
+					name: '部门G',
+					parentId: 2
+				},
+				{
+					id: 8,
+					name: '部门H',
+					parentId: 4
+				}
+			];
+			function convert(list) {
+				const res = []
+				const map = list.reduce((res, v) => (res[v.id] = v, v.children = [], res), {});
+				console.log(map)
+				for (const item of list) {
+					if (item.parentId === 0) {
+						res.push(item)
+						continue
+					}
+					if (item.parentId in map) {
+						const parent = map[item.parentId]
+						parent.children = parent.children || []
+						parent.children.push(item)
+					}
+				}
+				return res
+			}
+
+			let res = fn(arr);
+			console.log(res)
+			
+			let parrent = [];
+			let 
+			
+			function toTree(data) {
+			        let parents = data.filter((data) => data.pid == 0);
+			        let children = data.filter((data) => data.pid != 0);
+			        separate(parents, children);
+			        console.log(parents);
+			      }
+			//递归处理
+			      function separate(parents, children) {
+			        parents.map((p) => {
+			            children.map((c, i) => {
+			              if (p.id === c.pid) {
+			                  let _children  = JSON.parse(JSON.stringify(children)); 
+			                  //children是引用类型，不能直接=
+			                  _children.splice(i, 1);//删除用过的
+			                separate([c], _children)
+			                if (p.children) {
+			                  p.children.push(c);
+			                } else {
+			                  p.children = [c];
+			                }
+			              }
+			          });
+			        });
+			      }
+		</script>
+	</body>
+</html>

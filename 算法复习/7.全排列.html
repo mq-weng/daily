@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>全排列</title>
+  </head>
+  <body>
+    <script>
+      /* 思路：
+            坑位固定
+            找到坑位，放没放过的数字
+        */
+      let arr = [4, 7, 9];
+      function fn(arr) {
+        let visited = {};
+        let cur = [];
+        let res = [];
+        let len = arr.length;
+        function dfs(key) {
+          if(key === len){
+            res.push(cur.slice()); // cur是引用类型，不能直接用
+            return;
+          }
+          for (let i = 0; i < len; i++) {
+            if (!visited[arr[i]]) {
+              visited[arr[i]] = 1;
+              cur.push(arr[i]);
+              dfs(key + 1);
+              cur.pop();
+              visited[arr[i]] = 0;
+            }
+          }
+        }
+        dfs(0);
+        return res;
+      }
+      let res = fn(arr);
+      console.log(res)
+    </script>
+  </body>
+</html>

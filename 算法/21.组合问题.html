@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+            给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
+        */
+      let arr = [1, 2, 3, 4];
+      function fn(arr) {
+        let len = arr.length;
+        let res = []; // 全排列数组
+        let cur = [];
+        function dfs(key) {
+          res.push(cur.slice());
+          for (let i = key; i < len; i++) {
+            cur.push(arr[i]);
+            dfs(i + 1);
+            cur.pop();
+          }
+        }
+        dfs(0);
+        return res;
+      }
+      console.log(fn(arr));
+    </script>
+  </body>
+</html>

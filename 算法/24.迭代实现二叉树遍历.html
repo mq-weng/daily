@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>迭代</title>
+  </head>
+  <body>
+    <script>
+      // 题目描述：给定一个二叉树，返回它的前 中 后 序 遍历。 使用迭代法
+      const root = {
+        val: "A",
+        left: {
+          val: "B",
+          left: {
+            val: "D",
+          },
+          right: {
+            val: "E",
+          },
+        },
+        right: {
+          val: "C",
+          right: {
+            val: "F",
+          },
+        },
+      };
+      // 先序遍历
+      function preorder(root) {
+        let stack = [];
+        let res = [];
+        stack.push(root);
+        while (stack.length) {
+          let top = stack.pop();
+          res.push(top.val);
+          top.right && stack.push(top.right);
+          top.left && stack.push(top.left);
+        }
+        return res;
+      }
+      // 后序遍历（颠倒顺序的前序遍历）
+      function postorder(root) {
+        let stack = [];
+        let res = [];
+        stack.push(root);
+        while (stack.length) {
+          let top = stack.pop();
+          res.unshift(top.val);     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+          top.left && stack.push(top.left); 
+          top.right && stack.push(top.right);
+        }
+        return res;
+      }
+
+      // 中序遍历
+      function inorder(){
+
+      }
+      console.log(preorder(root)); // ABDECF
+      console.log(postorder(root)); // DEBFCA
+      console.log(inorder(root))  // DBEACF
+    </script>
+  </body>
+</html>

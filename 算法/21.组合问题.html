@@ -18,6 +18,7 @@
         let cur = [];
         function dfs(key) {
           res.push(cur.slice());
+          // 不能取重复的，所以从key开始
           for (let i = key; i < len; i++) {
             cur.push(arr[i]);
             dfs(i + 1);

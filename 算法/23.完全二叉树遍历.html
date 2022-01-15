@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>遍历</title>
+  </head>
+  <body>
+    <script>
+      // 题目描述：给定一个完全二叉树，返回它的前序（先序）遍历序列。
+      let arr = [1, 2, 3, 4];
+      // 如果不是树状结构，不用构造树
+      /*
+               完全二叉树
+
+        1.第n个元素的左子树为2*n+1；
+
+        2.第n个元素的右子树为2*n+2；
+
+        3.第n个子树的父节点为（n-1）/2;
+        
+      */
+      function fn(arr) {
+        recure(0);
+      }
+      function recure(key) {
+        if (arr[key]) {
+          console.log(arr[key]);
+        }
+        if (key * 2 + 1 < arr.length) {
+          recure(key * 2 + 1);
+        }
+        if (key * 2 + 2 < arr.length) {
+          recure(key * 2 + 2);
+        }
+      }
+      fn(arr);
+    </script>
+  </body>
+</html>

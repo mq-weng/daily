@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>翻转二叉树</title>
+  </head>
+  <body>
+    <script>
+      const root = {
+        val: "A",
+        left: {
+          val: "B",
+          left: {
+            val: "D",
+          },
+          right: {
+            val: "E",
+          },
+        },
+      };
+      const invertTree = function (root) {
+        // 定义递归边界
+        if (!root) {
+          return root;
+        }
+        // 递归交换右孩子的子结点
+        let right = invertTree(root.right);
+        // 递归交换左孩子的子结点
+        let left = invertTree(root.left);
+        // 交换当前遍历到的两个左右孩子结点
+        if (right) {
+          root.left = right;
+        } else {
+          delete root.left;
+        }
+        if (left) {
+          root.right = left;
+        } else {
+          delete root.right;
+        }
+        return root;
+      };
+      invertTree(root);
+      console.log(root);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+            二叉搜索树
+        */
+      const root = {
+        val: 8,
+        left: {
+          val: 6,
+          left: {
+            val: 5,
+          },
+          right: {
+            val: 7,
+          },
+        },
+        right: {
+          val: 11,
+          left: {
+            val: 9,
+          },
+          right: {
+            val: 13,
+          },
+        },
+      };
+      // 查找某一特定值
+      function search(root, num) {
+        // 若 root 为空，查找失败，直接返回
+        if (!root) {
+          return;
+        }
+        if (root.val == num) {
+          console.log(root.val);
+        } else if (root.val < num) {
+          search(root.right, num);
+        } else {
+          search(root.left, num);
+        }
+      }
+      // 插入值
+      function insert(root, num) {
+        if (!root) {
+          root = new TreeNode(num); // 找到空位，创建树形结构
+          return root;
+        }
+        if (num > root.val) {
+          root.right = insert(root.right, num);
+        } else if (num < root.val) {
+          root.left = insert(root.left, num);
+        }
+        return root;
+      }
+      console.log(insert(root, 11));
+    </script>
+  </body>
+</html>

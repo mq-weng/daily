@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const root = {
+        val: 8,
+        left: {
+          val: 6,
+          left: {
+            val: 5,
+          },
+          right: {
+            val: 7,
+          },
+        },
+        right: {
+          val: 11,
+          left: {
+            val: 9,
+          },
+          right: {
+            val: 13,
+          },
+        },
+      };
+      function deleteNode(root, num) {
+        if (!root) {
+          return root;
+        }
+        if (root.val == num) {
+          if (root.left || (root.left && root.right)) {
+            let rootMax = findMax(root.left);
+            root.val = rootMax.val;
+            deleteNode(root.left, rootMax.val)
+            // root.left = deleteNode(root.left, rootMax.val);
+          } else if (root.right) {
+            let rootMin = findMin(root.right);
+            deleteNode(root.right, rootMin.val)
+            // root.right = deleteNode(root.right, rootMin.val);
+          } else {
+            root = null;
+            console.log("fff");
+          }
+        } else if (root.val < num) {
+          root.right = deleteNode(root.right, num);
+          console.log("right",root.right)
+        } else {
+          root.left = deleteNode(root.left, num);
+          console.log("left", root.left)
+        }
+        console.log(root)
+        return root;
+      }
+
+      // 寻找左子树最大值
+      function findMax(root) {
+        while (root.right) {
+          root = root.right;
+        }
+        return root;
+      }
+
+      // 寻找右子树的最小值
+      function findMin(root) {
+        while (root.left) {
+          root = root.left;
+        }
+        return root;
+      }
+
+       let r = deleteNode(root, 8);
+       console.log(r)
+    </script>
+  </body>
+</html>

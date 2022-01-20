@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 检测变化注意事项</title>
+  </head>
+  <body>
+    <div id="app">
+      {{ obj }}
+      <button @click="fn">点击</button>
+      {{ arr }}
+      <button @click="fnarr">点击</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      let vm = new Vue({
+        el: "#app",
+        data: {
+          obj: { name: "画虎", age: 10 },
+          arr: [1, 2, 3, { name: "koko" }],
+        },
+        methods: {
+          fn() {
+            // this.obj = Object.assign({}, this.obj, { money: 12234 });
+            this.obj.money = "huh";
+          },
+          fnarr() {
+            Vue.set(vm.arr, 0, "jii");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const root = {
+        val: 8,
+        left: {
+          val: 6,
+          left: {
+            val: 5,
+          },
+          right: {
+            val: 7,
+          },
+        },
+        right: {
+          val: 11,
+          left: {
+            val: 9,
+          },
+          right: {
+            val: 13,
+          },
+        },
+      };
+      let deleteNode = function (root, num) {
+        if (!root) {
+          return root;
+        }
+        if (num == root.val) {
+          if (!root.left && !root.right) {
+            root = null;
+          } else if (root.left) {
+            let max = findMax(root.left);
+            root.val = max.val;
+            deleteNode (root.left, max.val);
+          } else {
+            let min = findMin(root.right);
+            root.val = min.val;
+            deleteNode (root.right, min.val);
+          }
+        } else if (num < root.val) {
+          root.left = deleteNode (root.left, num);
+        } else {
+          root.right = deleteNode (root.right, num);
+        }
+        return root;
+      };
+      function findMax(root) {
+        while (root.right) {
+          root = root.right;
+        }
+        return root;
+      }
+      function findMin(root) {
+         while (root.left) {
+          root = root.left;
+        }
+        return root;
+      }
+      let ro = deleteNode(root, 8);
+      console.log(ro)
+    </script>
+  </body>
+</html>

@@ -27,7 +27,8 @@
             this.obj.money = "huh";
           },
           fnarr() {
-            Vue.set(vm.arr, 0, "jii");
+            // Vue.set(vm.arr, 0, "jii");
+            vm.arr.fill(0,1);
           },
         },
       });

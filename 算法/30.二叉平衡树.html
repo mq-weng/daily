@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Tree(num) {
+        this.val = num;
+        this.left = null;
+        this.right = null;
+      }
+        function dsf(arr) {
+          if (!arr.length) return;
+          const mid = Math.floor(arr.length / 2);
+          const root = new Tree(arr[mid]);
+          root.left = dsf(arr.slice(0, mid));
+          root.right = dsf(arr.slice(mid + 1));
+          return root;
+        }
+      console.log(dsf([-10, -3, 0, 5, 9]));
+    </script>
+  </body>
+</html>

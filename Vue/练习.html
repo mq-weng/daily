@@ -1,0 +1,44 @@
+<div id="app">
+    {{ message }}
+    <span v-html="html"></span>
+  </div>
+  <div id="app-2">
+    <span v-bind:title="message">
+      鼠标悬停几秒钟查看此处动态绑定的提示信息！
+    </span>
+    <div>
+      {{ctitle}}
+      <prop-update v-bind:ctitle.sync="ctitle"></prop-update>
+    </div>
+  </div>
+  
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    Vue.component("prop-update", {
+      props: ["ctitle"],
+      template: `<div>
+        <span @click="onchange">{{ ctitle }}<span>
+        </div>`,
+        methods: {
+          onchange(){
+            this.$emit('update:ctitle', 'h4')
+          }
+        },
+    });
+    var app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue!",
+        html: "<div style='background-color: red'>hhhh</div>",
+      },
+    });
+    var app2 = new Vue({
+      el: "#app-2",
+      data: {
+        message: "页面加载于 " + new Date().toLocaleString(),
+        ctitle: "h1",
+      },
+  
+    });
+  </script>
+  

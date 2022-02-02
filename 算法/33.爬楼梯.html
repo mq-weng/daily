@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        1. 递归思想明确树形思维模型：找到问题终点，思考倒退的姿势，往往可以帮助你更快速地明确状态间的关系
+        2. 结合记忆化搜索，明确状态转移方程（找规律）
+    */
+
+      //  递归 有大量重复操作
+      function climb(num) {
+        if (num == 1) {
+          return 1;
+        }
+        if (num == 2) {
+          return 2;
+        }
+        return climb(num - 1) + climb(num - 2);
+      }
+      //  动态规划  存值
+      function climb(num) {
+        const res = [];
+        res[1] = 1;
+        res[2] = 2;
+        for (let i = 3; i < num; i++) {
+          res[i] = res[i - 1] + res[i - 2];
+        }
+        return res[num];
+      }
+    </script>
+  </body>
+</html>

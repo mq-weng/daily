@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const root = {
+        val: 3,
+        right: {
+          val: 11,
+          left: {
+            val: 9,
+            left: {
+              val: 9,
+            },
+          },
+          right: {
+            val: 13,
+          },
+        },
+      };
+      function fn(root) {
+        let flag = true;
+        function dfs(root) {
+          if (!root || !flag) {
+            return 0;
+          }
+          const left = dfs(root.left);
+          const right = dfs(root.right);
+          if (Math.abs(left - right) > 1) {
+            flag = false;
+            return 0;
+          }
+          return Math.max(left, right) + 1;
+        }
+        dfs(root);
+        return flag;
+      }
+      fn(root);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+            给你一棵二叉搜索树，请你返回一棵平衡后的二叉搜索树，新生成的树应该与原来的树有着相同的节点值。
+        */
+      function fn(root) {
+        function buildAVL(low, high) {
+          // 若 low > high，则越界，说明当前索引范围对应的子树已经构建完毕
+          if (low > high) {
+            return null;
+          }
+          // 取数组的中间值作为根结点值
+          const mid = Math.floor(low + (high - low) / 2);
+          // 创造当前树的根结点
+          const cur = new TreeNode(nums[mid]);
+          // 构建左子树
+          cur.left = buildAVL(low, mid - 1);
+          // 构建右子树
+          cur.right = buildAVL(mid + 1, high);
+          // 返回当前树的根结点
+          return cur;
+        }
+        // 调用中序遍历方法，求出 nums
+        inorder(root);
+        // 基于 nums，构造平衡二叉树
+        return buildAVL(0, nums.length - 1);
+      }
+      function inorder(root) {
+        if (!root) {
+          return;
+        }
+        let r = [];
+        inorder(root.left);
+        r.push(root.val);
+        inorder(root.right);
+      }
+    </script>
+  </body>
+</html>

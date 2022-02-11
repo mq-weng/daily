@@ -1,0 +1,16 @@
+{
+  "name": "manage",
+  "version": "1.0.0",
+  "description": "个人生活管理系统",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack ./src/main.js --mode development"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  }
+}

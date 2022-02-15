@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //求 a 和 b 相乘的值，a 和 b 可能是小数，需要注意结果的精度问题
+      function multiply(a, b) {
+        let m = fn(a);
+        let n = fn(b);
+        a = a * Math.pow(10, m);
+        b = b * Math.pow(10, n);
+        return (a * b) / Math.pow(10, m + n);
+      }
+      function fn(n) {
+        let res = [];
+        n = new String(n);
+        if (n.indexOf(".") < 0) {
+          res = 0;
+        } else {
+          res = n.split(".")[1].length;
+        }
+        return res;
+      }
+      console.log(multiply(1.1, 0.3));
+    </script>
+  </body>
+</html>

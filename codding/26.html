@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+             将输入的变量名转换为小驼峰写法
+
+可能的输入命名格式如下：
+
+TestVariable
+
+test_variable
+
+TEST_VARIABLE，
+最终输出为testVariable 
+        */
+      function format(name) {
+        if (name.length == 0) {
+          return "";
+        }
+        // write code here
+        let site = name.indexOf("_");
+        let arr = [];
+        if (site > 0) {
+          name = name.toLocaleLowerCase();
+          arr = name.split("_");
+          let x = arr[1].slice(0, 1);
+          x = x.toLocaleUpperCase();
+          let y = arr[1].slice(1)
+          return arr[0] + x + y;
+        } else {
+          return name[0].toLocaleLowerCase() + name.slice(1);
+        }
+      }
+    //   console.log(format("TEST_VARIABLE"));
+    //   console.log(format("test_variable"));
+      console.log(format("tuhuu"))
+    </script>
+  </body>
+</html>

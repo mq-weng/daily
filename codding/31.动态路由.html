@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+            其实一般对后端获取的路由数据只需要处理 component 的引入，其他字段基本保持一致。
+        */
+
+      // 模拟后端数据
+      let fakeRouter = [
+        {
+          path: "",
+          component: "Layout",
+          redirect: "dashboard",
+          children: [
+            {
+              path: "dashboard",
+              component: "dashboard/index",
+              meta: {
+                title: "首页",
+                icon: "dashboard",
+              },
+            },
+          ],
+        },
+        {
+          path: "/example",
+          component: "Layout",
+          redirect: "/example/table",
+          name: "Example",
+          meta: {
+            title: "案例",
+            icon: "example",
+          },
+          children: [
+            {
+              path: "table",
+              name: "Table",
+              component: "table/index",
+              meta: {
+                title: "表格",
+                icon: "table",
+              },
+            },
+            {
+              path: "tree",
+              name: "Tree",
+              component: "tree/index",
+              meta: {
+                title: "树形菜单",
+                icon: "tree",
+              },
+            },
+          ],
+        },
+        {
+          path: "/form",
+          component: "Layout",
+          children: [
+            {
+              path: "index",
+              name: "Form",
+              component: "form/index",
+              meta: {
+                title: "表单",
+                icon: "form",
+              },
+            },
+          ],
+        },
+        {
+          path: "*",
+          redirect: "/404",
+          hidden: true,
+        },
+      ];
+
+      function getRouter(fakeRouter) {
+        let router = {};
+        const res = [];
+        const keys = ["path", "name", "children", "redirect", "meta", "hidden"];
+        fakeRouter.forEach((element) => {
+          if (element.component) {
+            router.component = () => {
+              import(`@/views/${element.component}/index.vue`);
+            };
+          }
+          for (const key in element) {
+            if (keys.includes(key)) {
+              router[key] = element[key];
+            }
+          }
+          if (element.children && element.children.length) {
+            router.children = getRouter(element.children);
+          }
+          res.push(router);
+        });
+        return res;
+      }
+     
+      console.log( getRouter(fakeRouter));
+    </script>
+  </body>
+</html>

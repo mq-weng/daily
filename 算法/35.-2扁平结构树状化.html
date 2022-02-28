@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 利用两次循环代替递归, 不存在栈溢出的问题, 10ms
+      // 去找他的父节点
+      function tree(arr) {
+        let treeList = []; // 返回的结果数组
+        let map = {};  // 相当于词典
+        arr.forEach((element) => {
+          element.children = [];
+          map[element.node_id] = element;
+        });
+        arr.forEach((element) => {
+          const parent = map[element.parent_id];
+          if (parent) {
+            parent.children.push(element);
+          } else {
+            treeList.push(element);
+          }
+        });
+        return treeList;
+      }
+      var arr = [
+        {
+          node_id: 1,
+          parent_id: 0,
+          name: "aaa",
+        },
+        {
+          node_id: 2,
+          parent_id: 0,
+          name: "bbb",
+        },
+        {
+          node_id: 3,
+          parent_id: 1,
+          name: "ccc",
+        },
+        {
+          node_id: 4,
+          parent_id: 1,
+          name: "ddd",
+        },
+        {
+          node_id: 5,
+          parent_id: 3,
+          name: "eee",
+        },
+        {
+          node_id:6,
+          parent_id:5,
+          name:"xxx"
+        }
+      ];
+      console.log(tree(arr));
+
+      /**
+       * 把平铺的数组结构转成树形结构
+       *
+       * [
+       *  {id:"01", parent_id:"",   "name":"老王" },
+       *  {id:"02", parent_id:"01", "name":"小张" }
+       * ]
+       * 上面的结构说明： 老王是小张的上级
+       */
+      function tranListToTreeData(list) {
+        // 最终要产出的树状数据的数组
+        const treeList = [];
+        // 所有项都使用对象存储起来
+        const map = {};
+
+        // 建立一个映射关系：通过id快速找到对应的元素
+        list.forEach((item) => {
+          if (!item.children) {
+            item.children = [];
+          }
+          map[item.node_id] = item;
+        });
+        // map:
+        // {
+        //   "312c": { 'id': '312c', 'parent_id': '',     'name': '财务部',    children: [{ 'id': '312d', 'parent_id': '312c', 'name': '财务核算部',children: []}] },
+        //   "312d": { 'id': '312d', 'parent_id': '312c', 'name': '财务核算部',children: []}
+        // }
+
+        list.forEach((item) => {
+          // 对于每一个元素来说，先找它的上级
+          //    如果能找到，说明它有上级，则要把它添加到上级的children中去
+          //    如果找不到，说明它没有上级，直接添加到 treeList
+          const parent = map[item.parent_id];
+          // 如果存在上级则表示item不是最顶层的数据
+          if (parent) {
+            parent.children.push(item);
+          } else {
+            // 如果不存在上级 则是顶层数据,直接添加
+            treeList.push(item);
+          }
+        });
+        // 返回出去
+        return treeList;
+      }
+    </script>
+  </body>
+</html>

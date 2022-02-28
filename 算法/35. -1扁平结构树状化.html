@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var arr = [
+        {
+          node_id: 1,
+          parent_id: 0,
+          name: "aaa",
+        },
+        {
+          node_id: 2,
+          parent_id: 0,
+          name: "bbb",
+        },
+        {
+          node_id: 3,
+          parent_id: 1,
+          name: "ccc",
+        },
+        {
+          node_id: 4,
+          parent_id: 1,
+          name: "ddd",
+        },
+        {
+          node_id: 5,
+          parent_id: 3,
+          name: "eee",
+        },
+      ];
+
+      function tree(arr) {
+        let parents = [];
+        let children = [];
+        arr.forEach((element) => {
+          if (element.parent_id == 0) {
+            parents.push(element);
+          } else {
+            children.push(element);
+          }
+        });
+        return find(parents, children);
+        function find(parents, children) {
+          parents.forEach((pelement) => {
+            pelement.children = [];
+            let p = [];
+            let c = [];
+            children.forEach((celement, index) => {
+              if (pelement.node_id == celement.parent_id) {
+                pelement.children.push(celement);
+                p.push(celement);
+              } else {
+                c.push(celement);
+              }
+            });
+            find(p, c);
+          });
+          return parents;
+        }
+      }
+
+      console.log(tree(arr));
+    </script>
+  </body>
+</html>

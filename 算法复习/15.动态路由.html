@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let fakeRouter = [
+        {
+          path: "",
+          component: "Layout",
+          redirect: "dashboard",
+          children: [
+            {
+              path: "dashboard",
+              component: "dashboard/index",
+              meta: {
+                title: "首页",
+                icon: "dashboard",
+              },
+            },
+          ],
+        },
+        {
+          path: "/example",
+          component: "Layout",
+          redirect: "/example/table",
+          name: "Example",
+          meta: {
+            title: "案例",
+            icon: "example",
+          },
+          children: [
+            {
+              path: "table",
+              name: "Table",
+              component: "table/index",
+              meta: {
+                title: "表格",
+                icon: "table",
+              },
+            },
+            {
+              path: "tree",
+              name: "Tree",
+              component: "tree/index",
+              meta: {
+                title: "树形菜单",
+                icon: "tree",
+              },
+            },
+          ],
+        },
+        {
+          path: "/form",
+          component: "Layout",
+          children: [
+            {
+              path: "index",
+              name: "Form",
+              component: "form/index",
+              meta: {
+                title: "表单",
+                icon: "form",
+              },
+            },
+          ],
+        },
+        {
+          path: "*",
+          redirect: "/404",
+          hidden: true,
+        },
+      ];
+      function fn(fakeRouter) {
+          let routeArr = [];
+          let keys = ['meta','path','name','children','redirect','hidden']
+        fakeRouter.forEach((item) => {
+            let routNow = {};
+            if(item.component){
+                routNow.component = ()=>{import (`@view/${item.component}`)} 
+            }
+            keys.forEach((key) => {
+                if(item[key]){
+                    routNow[key] = item[key];
+                }
+            });
+            if(item.children && item.children.length){
+               routNow.children = fn(item.children);
+            }
+            routeArr.push(routNow);
+        });
+        return routeArr;
+      }
+      console.log(fn(fakeRouter))
+    </script>
+  </body>
+</html>

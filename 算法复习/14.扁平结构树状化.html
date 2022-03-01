@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var arr = [
+        {
+          node_id: 1,
+          parent_id: 0,
+          name: "aaa",
+        },
+        {
+          node_id: 2,
+          parent_id: 0,
+          name: "bbb",
+        },
+        {
+          node_id: 3,
+          parent_id: 1,
+          name: "ccc",
+        },
+        {
+          node_id: 4,
+          parent_id: 1,
+          name: "ddd",
+        },
+        {
+          node_id: 5,
+          parent_id: 3,
+          name: "eee",
+        },
+        {
+          node_id: 6,
+          parent_id: 3,
+          name: "nnn",
+        },
+      ];
+      // 利用循环,也利用了传址
+      function beTree(arr) {
+        let hash = {};
+        let res = [];
+        arr.forEach((item) => {
+          hash[item.node_id] = item;
+          hash[item.node_id].children = [];
+        });
+        arr.forEach((item) => {
+          if (hash[item.parent_id]) {
+            hash[item.parent_id].children.push(item);
+          } else {
+            res.push(item);
+          }
+        });
+        console.log(res);
+      }
+      beTree(arr);
+      console.log(arr)
+    </script>
+  </body>
+</html>

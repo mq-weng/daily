@@ -24,3 +24,6 @@ git stash 存储当前工作区 (当前分支不能提交，却需要切分支de
 git stash list 查看存储区的清单
 git apply [index] 恢复指定的stash git stash drop 清空stash
 git stash pop 前两步的合体
+
+
+kkjn

@@ -4,7 +4,7 @@ git reset 回退版本
     git reset –soft 不会改变stage(暂存区)区，仅仅将commit回退到了指定的提交
     git reset –mixed 不会改变工作区，但是会用指定的commit覆盖stage区也就是清空暂存区
     git reset –hard 使用指定的commit的内容覆盖stage区和工作区
-
+回退之后再 push 必须加上 --force
 
 git status 查看仓库状态
 git diff 显示工作区与缓存区的区别

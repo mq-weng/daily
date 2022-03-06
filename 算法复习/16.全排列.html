@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function fn(arr) {
+        let len = arr.length;
+        let visited = {};
+        let cur = [];
+        let res = [];
+        function dfs(index) {
+          if (index == len) {
+            res.push(cur.slice()); // 这里如果直接写 cur ，
+            console.log("res",res)
+            return;
+          }
+          for (let i = 0; i < len; i++) {
+            if (!visited[arr[i]]) {
+              cur.push(arr[i]);
+              visited[arr[i]] = 1;
+              dfs(index + 1);
+              cur.pop(); 
+            //   console.log(cur)  由于引用的都是cur,cur会被清空，导致 res 全是空数组
+              visited[arr[i]] = 0; 
+            }
+          }
+        }
+        dfs(0);
+        return res;
+      }
+      console.log(fn([1,2,3]))
+    </script>
+  </body>
+</html>

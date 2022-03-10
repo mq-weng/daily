@@ -7,15 +7,34 @@ const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/dairy/index.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/person/index.vue'),
+    children:[
+      {
+        path: '/diray',
+        name: 'Diray',
+        component: () => import(/* webpackChunkName: "about" */ '../views/person/diray/index.vue'),
+      },
+      {
+        path: '/schedule',
+        name: 'Schedule',
+        component: () => import(/* webpackChunkName: "about" */ '../views/person/schedule/index.vue'),
+      },
+      {
+        path: '/study',
+        name: 'Study',
+        component: () => import(/* webpackChunkName: "about" */ '../views/person/study/index.vue'),
+      },
+    ]
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/dairy/index.vue')
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "about" */ '../views/login/index.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import(/* webpackChunkName: "about" */ '../views/register/index.vue')
   }
 ]
 

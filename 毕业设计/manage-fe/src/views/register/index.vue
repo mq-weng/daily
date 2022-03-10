@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <div class="login-header">个人生活管理系统</div>
-    <div class="login-title">登录个人生活管理系统，一起享受有序生活！</div>
+    <div class="login-title">注册个人生活管理系统，开启有序生活！</div>
     <el-card class="login-card">
       <div class="login-card-title">welcome</div>
       <el-input placeholder="请输入用户名" v-model="userName"></el-input>
@@ -11,8 +11,7 @@
         v-model="userPassword"
       ></el-input>
       <div class="login-nav">
-        <router-link to="{path: ''}">忘记密码？</router-link>|
-        <router-link :to="{ path: '/register' }">立即注册</router-link>
+        <router-link :to="{ path: '/login' }">已有账号，登录</router-link>
       </div>
       <div style="width: 100%; text-align: center">
         <el-button

@@ -2,8 +2,9 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import { Button, Menu, MenuItem, Submenu } from "element-ui";
-const uiCommponets = [Button, Menu, MenuItem, Submenu];
+import './style/index'
+import { Button, Menu, MenuItem, Submenu, Image, Card, Form, Input } from "element-ui";
+const uiCommponets = [Button, Menu, MenuItem, Submenu, Image, Card, Form, Input];
 Vue.config.productionTip = false;
 uiCommponets.forEach((uiCommponet) => {
   Vue.use(uiCommponet);

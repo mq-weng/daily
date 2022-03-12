@@ -10,20 +10,26 @@ const routes: Array<RouteConfig> = [
     component: () => import(/* webpackChunkName: "about" */ '../views/person/index.vue'),
     children:[
       {
-        path: '/diray',
+        path: 'diray',
         name: 'Diray',
         component: () => import(/* webpackChunkName: "about" */ '../views/person/diray/index.vue'),
       },
       {
-        path: '/schedule',
+        path: 'schedule',
         name: 'Schedule',
         component: () => import(/* webpackChunkName: "about" */ '../views/person/schedule/index.vue'),
       },
       {
-        path: '/study',
+        path: 'study',
         name: 'Study',
         component: () => import(/* webpackChunkName: "about" */ '../views/person/study/index.vue'),
       },
+      {
+        path: 'account',
+        name: 'Account',
+        component: () => import(/* webpackChunkName: "about" */ '../views/person/account/index.vue'),
+      },
+
     ]
   },
   {

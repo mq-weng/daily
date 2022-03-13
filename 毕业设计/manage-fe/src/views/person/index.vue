@@ -19,7 +19,7 @@
           mode="horizontal"
           :default-active="activeIndex"
         >
-          <router-link :to="{ path: 'diray' }"
+          <router-link :to="{ name: 'Diray' }"
             ><el-menu-item index="1">日记 </el-menu-item></router-link
           >
 

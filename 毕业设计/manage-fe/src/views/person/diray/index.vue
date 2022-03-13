@@ -1,12 +1,26 @@
 <template>
   <div class="dairy">
-    日记
-    <!-- <el-button>会复发和</el-button> -->
-    <div id="div1">
+    <div id="wangeditor"></div>
+    <div class="dairy-btn-container">
+      <el-button type="primary" class="dairy-btn" @click="getEditorData">
+        发表日记
+      </el-button>
     </div>
-    <el-button type="primary" class="btn" @click="getEditorData">
-      获取当前内容
-    </el-button>
+    <div class="dairy-show">
+      <div class="dairy-show-left">
+        <div class="dairy-show-left-english">DAIRY</div>
+        <div class="dairy-show-left-china">日记</div>
+      </div>
+      <div class="dairy-show-right">
+        <el-card class="dairy-show-right-card">
+          <!--
+            这里可以变好看 
+            <div class="">日期</div>
+          <div class=""></div> -->
+          <div class="">内容</div>
+        </el-card>
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -27,7 +41,7 @@ export default {
   },
   methods: {
     init(): void {
-      (this as any).editor = new wangeditor("#div1");
+      (this as any).editor = new wangeditor("#wangeditor");
       (this as any).editor.create();
     },
     getEditorData(): void {
@@ -39,3 +53,43 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.dairy-btn-container{
+  .dairy-btn {
+  float: right;
+  margin-top: 20px;
+  width: 200px;
+}
+}
+.dairy-btn-container::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.dairy-show {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+&-left{
+  &-english{
+    font-size: 20px;
+  }
+  &-china{
+    font-size: 18px;
+    text-align: right;
+    color: #FFC001;
+  }
+}
+&-right{
+  &-card{
+    width: 65vw;
+    height: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 8px;
+    font-size: 18px;
+    padding: 10px;
+  }
+}
+}
+</style>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+
+      // 有个序列仅有 -1，+1，有多少个连续子序列，乘积为正数
+      function fn(n, arr) {
+        let res = 0;
+        let curr = [];
+        let i = 0;
+        while (i <= arr.length) {
+          if (i == arr.length) {
+            arr.shift();
+            i = 0;
+            curr = [];
+          }
+          curr.push(arr[i]);
+          let x = curr.reduce((nums, item) => {
+            return item * nums;
+          }, 1);
+          if (x > 0) {
+            res++;
+          }
+          i++;
+        }
+        return res;
+      }
+      console.log(fn(5, [1, 1, -1, -1,1]));
+    </script>
+  </body>
+</html>

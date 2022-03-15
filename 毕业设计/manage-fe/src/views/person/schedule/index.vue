@@ -8,18 +8,26 @@
         style="width: 700px; margin: 20px auto"
         size="mini"
       >
-        <el-form-item label="日程名称">
+        <!-- <el-form-item label="日程名称">
           <el-input v-model="newSchedule.title"></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="日程内容">
-          <el-input type="textarea" v-model="newSchedule.body"></el-input>
+          <el-input type="textarea" v-model="newSchedule.title"></el-input>
         </el-form-item>
         <el-form-item label="开始日期">
-          <el-date-picker v-model="newSchedule.start" type="date" placeholder="选择日期">
+          <el-date-picker
+            v-model="newSchedule.start"
+            type="date"
+            placeholder="选择日期"
+          >
           </el-date-picker>
         </el-form-item>
         <el-form-item label="结束日期">
-          <el-date-picker v-model="newSchedule.end" type="date" placeholder="选择日期">
+          <el-date-picker
+            v-model="newSchedule.end"
+            type="date"
+            placeholder="选择日期"
+          >
           </el-date-picker>
         </el-form-item>
         <el-button @click="add" size="small" type="primary">新建日程</el-button>
@@ -42,7 +50,7 @@ export default {
           calendarId: "1",
           title: "my schedule",
           category: "time",
-          body: "ffhdfdh",
+          // body: "ffhdfdh", 暂时用title
           start: "2022-03-13",
           end: "2022-03-19",
         },
@@ -52,9 +60,9 @@ export default {
         calendarId: "1",
         title: "second schedule",
         category: "time",
-        dueDateClass: "",
-        start: "2022-03-18",
-        end: "2022-03-19",
+        // body: "ffhdfdh",
+        start: "",
+        end: "",
       },
     };
   },
@@ -72,13 +80,19 @@ export default {
     init(): void {
       (this as any).calendar = new Calendar("#calendar", {
         defaultView: "month",
-        taskView: true,
-        scheduleView: ["time"],
         template: {
           monthDayname: function (dayname) {
             return (
               '<span class="calendar-week-dayname-name">' +
               dayname.label +
+              "</span>"
+            );
+          },
+          popupDetailBody: function (schedule) {
+            console.log(schedule.body);
+            return (
+              '<span class="calendar-week-dayname-name">' +
+              schedule.body +
               "</span>"
             );
           },
@@ -113,7 +127,7 @@ export default {
     add(): void {
       this.schedules.push(this.newSchedule);
       this.calendar.createSchedules([this.newSchedule]);
-      console.log(this.newSchedule)
+      console.log(this.newSchedule);
     },
   },
 };

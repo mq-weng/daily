@@ -3,8 +3,8 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import './style/index'
-import { Button, Menu, MenuItem, Submenu, Image, Card, Form, Input, Avatar, FormItem, DatePicker} from "element-ui";
-const uiCommponets = [Button, Menu, MenuItem, Submenu, Image, Card, Form, Input, Avatar, FormItem, DatePicker];
+import { Button, Menu, MenuItem, Submenu, Image, Card, Form, Input, Avatar, FormItem, DatePicker,Select,Option,Table,TableColumn} from "element-ui";
+const uiCommponets = [Button, Menu, MenuItem, Submenu, Image, Card, Form, Input, Avatar, FormItem, DatePicker,Select,Option,Table,TableColumn];
 Vue.config.productionTip = false;
 uiCommponets.forEach((uiCommponet) => {
   Vue.use(uiCommponet);

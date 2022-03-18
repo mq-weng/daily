@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .h1{
+            background-color: aqua;
+            height: 200px;
+        }
+        .h2{
+            background-color: antiquewhite;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="h1">
+        sbsb
+        <div class="h2">ssdbh</div>
+    </div>
+    <script>
+        // 冒泡和捕获
+        let h1 = document.getElementsByClassName('h1')[0];
+        h1.addEventListener('click',(e)=>{
+            console.log('h1')
+        },true)
+        let h2 = document.getElementsByClassName('h2')[0];
+        h2.addEventListener('click',(e)=>{
+            console.log('h2')
+        },true)
+    </script>
+</body>
+</html>

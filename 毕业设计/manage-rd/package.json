@@ -9,7 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.9.0",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^10.1.1",
     "mysql": "^2.18.1"
   }
 }

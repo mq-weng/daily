@@ -1,0 +1,16 @@
+const db = require('./db')
+
+// 新增日志，schedule:{userId,title,start,end}
+function addSchedule(schedule){
+    return db.query('INSERT INTO schedule SET ?',schedule);
+}
+
+// 查询日志
+function getSchedule(userId){
+    return db.query('SELECT * FROM schedule WHERE userId=?',userId);
+}
+
+mosules.exports = {
+    addSchedule,
+    getSchedule
+}

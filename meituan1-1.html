@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+// 全排列
+function per(arr){
+    let now = [];
+    let res = [];
+    let flag = {};
+    let len = arr.length;
+    function dfs(index){
+        if(index == len ){
+            res.push(now.slice());
+            return
+        }
+        for(let i = 0; i < len; i++){
+            if(!flag[arr[i]]){
+                flag[arr[i]] = 1;
+                now.push(arr[i]);
+                dfs(index + 1);
+                now.pop();
+                flag[arr[i]] = 0;
+            }
+        }
+    }
+    dfs(0);
+       return res;
+}
+     
+let ele = per([1,2,3]);
+ele.forEach((element) => {
+    console.log(element[2])
+})
+console.log();
+    </script>
+</body>
+</html>

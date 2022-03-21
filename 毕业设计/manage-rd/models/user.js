@@ -1,6 +1,5 @@
 const db = require("./db");
 
-// console.log(db.query("SELECT * FROM account").then((res)=>{console.log(res)}))
 
 // 注册,user:{name,password}
 function addUser(user) {

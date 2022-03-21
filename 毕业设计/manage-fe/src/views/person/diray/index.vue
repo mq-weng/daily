@@ -29,6 +29,7 @@ export default {
   data() {
     return {
       editor: null,
+      content: ''
     };
   },
   mounted() {

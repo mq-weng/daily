@@ -88,14 +88,6 @@ export default {
               "</span>"
             );
           },
-          popupDetailBody: function (schedule) {
-            console.log(schedule.body);
-            return (
-              '<span class="calendar-week-dayname-name">' +
-              schedule.body +
-              "</span>"
-            );
-          },
         },
       });
       this.calendar.createSchedules(this.schedules); //

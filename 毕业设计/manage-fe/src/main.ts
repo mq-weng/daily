@@ -2,13 +2,16 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import http from "./utils/http"
 import './style/index'
-import { Button, Menu, MenuItem, Submenu, Image, Card, Form, Input, Avatar, FormItem, DatePicker,Select,Option,Table,TableColumn} from "element-ui";
+import { Button, Menu, MenuItem, Submenu, Image, Card, Form, Input, Avatar, FormItem, DatePicker,Select,Option,Table,TableColumn,Message} from "element-ui";
 const uiCommponets = [Button, Menu, MenuItem, Submenu, Image, Card, Form, Input, Avatar, FormItem, DatePicker,Select,Option,Table,TableColumn];
 Vue.config.productionTip = false;
 uiCommponets.forEach((uiCommponet) => {
   Vue.use(uiCommponet);
 });
+Vue.prototype.$axios = http;
+Vue.prototype.$message = Message;
 new Vue({
   router,
   store,

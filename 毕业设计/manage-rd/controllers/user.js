@@ -7,6 +7,7 @@ let creatAuth = require("../auth/index");
 
 //用户登录
 async function login(ctx) {
+  console.log(ctx.body)
   //1.接收表单
   let { name, password } = ctx.request.body;
   //2.安全验证

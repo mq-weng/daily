@@ -16,6 +16,7 @@
       </div>
       <div style="width: 100%; text-align: center">
         <el-button
+          :plain="true"
           style="width: 150px; margin-top: 30px"
           type="primary"
           size="medium"
@@ -40,18 +41,27 @@ export default {
   methods: {
     submit() {
       const param = {
-        userName: this.userName.trim(),
-        userPassword: this.userPassword.trim(),
+        name: this.userName.trim(),
+        password: this.userPassword.trim(),
       };
-      console.log(param);
+      this.$axios.post("user/login", param).then(
+        (res) => {
+          if (res.data.state == "fail") {
+            this.$message.error(res.data.message);
+          }else{
+            localStorage.setItem('userId',)
+            this.$router.push('/')
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     },
   },
   watch: {
     userName: function (newQuestion) {
-      if (
-        newQuestion.trim().length > 0 &&
-        this.userPassword.length > 0
-      ) {
+      if (newQuestion.trim().length > 0 && this.userPassword.length > 0) {
         this.btnState = false;
       }
     },

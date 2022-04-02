@@ -8,7 +8,7 @@ function addUser(user) {
 
 // 登录
 function getUser(name, password) {
-  return db.query(`SELECT id FROM user WHERE name=? and password=?`, [
+  return db.query(`SELECT * FROM user WHERE name=? and password=?`, [
     name,
     password,
   ]);

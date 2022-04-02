@@ -46,11 +46,12 @@ export default {
       };
       this.$axios.post("user/login", param).then(
         (res) => {
-          if (res.data.state == "fail") {
-            this.$message.error(res.data.message);
-          }else{
-            localStorage.setItem('userId',)
-            this.$router.push('/')
+          const data = res.data;
+          if (data.state == "success") {
+            localStorage.setItem("userId", data.id);
+            this.$router.push("/");
+          } else {
+            this.$message.error(data.message);
           }
         },
         (err) => {

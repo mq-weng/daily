@@ -7,7 +7,7 @@ function addDairy(dairy){
 
 //查询日记,
 function getDairy(userId){
-    return db.query('SELECT * FROM dairy WHERE userId=?',userId)
+    return db.query('SELECT id,content FROM dairy WHERE userId=?',[userId])
 }
 
 module.exports = {

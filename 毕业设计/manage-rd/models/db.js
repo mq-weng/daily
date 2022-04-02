@@ -17,9 +17,9 @@ module.exports = {
         connection.query(sql, values, (err, res) => {
           connection.release();
           if (err) {
-            reject(err[0]);
+            reject(err);
           } else {
-            resolve(res[0]);
+            resolve(res);
           }
         });
       });

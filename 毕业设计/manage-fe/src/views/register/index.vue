@@ -20,7 +20,7 @@
           size="medium"
           @click="submit"
           :disabled="btnState"
-          >登录</el-button
+          >注册</el-button
         >
       </div>
     </el-card>
@@ -39,18 +39,26 @@ export default {
   methods: {
     submit() {
       const param = {
-        userName: this.userName.trim(),
-        userPassword: this.userPassword.trim(),
+        name: this.userName.trim(),
+        password: this.userPassword.trim(),
       };
-      console.log(param);
+      this.$axios.post("user/regist", param).then(
+        (res) => {
+          const data = res.data;
+          if (data.state == "success") {
+            this.$message.success(data.message);
+            this.$router.push("/login");
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     },
   },
   watch: {
     userName: function (newQuestion) {
-      if (
-        newQuestion.trim().length > 0 &&
-        this.userPassword.length > 0
-      ) {
+      if (newQuestion.trim().length > 0 && this.userPassword.length > 0) {
         this.btnState = false;
       }
     },

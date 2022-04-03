@@ -2,7 +2,6 @@ const { getDairy, addDairy } = require("../models/dairy.js");
 
 async function getList(ctx) {
   let { id } = ctx.query;
-  console.log("ss", id);
   let results = await getDairy(id);
   if (results.length > 0) {
     ctx.body = {

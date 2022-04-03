@@ -44,20 +44,10 @@ export default {
   data() {
     return {
       calendar: null,
-      schedules: [
-        {
-          id: "1",
-          calendarId: "1",
-          title: "my schedule",
-          category: "time",
-          // body: "ffhdfdh", 暂时用title
-          start: "2022-03-13",
-          end: "2022-03-19",
-        },
-      ],
+      schedules: [],
       newSchedule: {
         id: "2",
-        calendarId: "1",
+        // calendarId: "1",
         title: "second schedule",
         category: "time",
         // body: "ffhdfdh",
@@ -69,9 +59,9 @@ export default {
   created() {
     this.getSchedules();
   },
-  mounted(): void {
-    (this as any).init();
-  },
+  // mounted(): void {
+  //   (this as any).init();
+  // },
   beforeDestroy(): void {
     (this as any).calendar.destroy();
     (this as any).calendar = null;
@@ -115,10 +105,40 @@ export default {
     },
     getSchedules() {
       //获取日程表,放在 this.schedules 里面
+      this.$axios
+        .get("/schedule/getScheduleList", {
+          params: { userId: localStorage.getItem("userId") },
+        })
+        .then(
+          (res) => {
+            console.log(res.data.schedules);
+            this.schedules = res.data.schedules;
+            this.init();
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
     },
     add(): void {
-      this.schedules.push(this.newSchedule);
-      this.calendar.createSchedules([this.newSchedule]);
+      // this.schedules.push(this.newSchedule);
+      let { title, start, end } = this.newSchedule;
+      const param = {
+        userId: localStorage.getItem("userId"),
+        title,
+        start,
+        end,
+      };
+      this.$axios.post("schedule/addScheduleList", param).then(
+        (res) => {
+          console.log(res)
+          this.getScheduleList();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+      // this.calendar.createSchedules([this.newSchedule]);
       console.log(this.newSchedule);
     },
   },

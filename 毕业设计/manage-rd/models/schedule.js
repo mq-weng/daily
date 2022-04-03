@@ -10,7 +10,7 @@ function getSchedule(userId){
     return db.query('SELECT * FROM schedule WHERE userId=?',userId);
 }
 
-mosules.exports = {
+module.exports = {
     addSchedule,
     getSchedule
 }

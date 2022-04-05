@@ -46,9 +46,9 @@ export default {
       calendar: null,
       schedules: [],
       newSchedule: {
-        id: "2",
+        id: "",
         // calendarId: "1",
-        title: "second schedule",
+        title: "",
         category: "time",
         // body: "ffhdfdh",
         start: "",
@@ -131,8 +131,12 @@ export default {
       };
       this.$axios.post("schedule/addScheduleList", param).then(
         (res) => {
-          console.log(res)
-          this.getScheduleList();
+          if(res.data.state == "success"){
+            this.$message.success(res.data.message)
+            location.reload();
+          }else{
+            this.$message.error(res.data.message)
+          }
         },
         (err) => {
           console.log(err);

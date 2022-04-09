@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // amount 总的金额，coins 硬币面额
+      function fn(coins, amount) {
+        let arr = []; // 硬币个数
+        arr[0] = 0;
+        for (let i = 1; i <= amount; i++) {
+          arr[i] = Infinity;
+          for (let j = 0; j < coins.length; j++) {
+            if (coins[j] <= i) {
+              arr[i] = Math.min(arr[i], arr[i - coins[j]] + 1); // 状态转移方程
+            }
+          }
+        }
+        if (!arr[amount] == Infinity) {
+          return -1;
+        }
+        return arr[amount];
+      }
+      console.log(fn([1, 2, 3,5], 11));
+    </script>
+  </body>
+</html>

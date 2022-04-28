@@ -18,7 +18,7 @@ async function login(ctx) {
       let { id } = results[0];
       //生成token
       let loginUser = name;
-      let token = creatAuth.creatAuthration({ name, password });
+      let token = creatAuth.creatAuthration({ name, password,id });
       ctx.body = { state: "success", token, loginUser, id };
     } else {
       ctx.body = {

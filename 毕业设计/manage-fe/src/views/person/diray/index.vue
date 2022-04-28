@@ -60,11 +60,12 @@ export default {
       // 提交
       this.$axios.post("/dairy/writeDairy", param).then(
         (res) => {
-          this.$message.success(res.message)
-          this.getList()
+          this.$message.success(res.data.message);
+          this.editor.txt.html('<p><br></p>'); 
+          this.getList();
         },
         (err) => {
-          this.$message.error(err.message);
+          this.$message.error(err.data.message);
         }
       );
     },
@@ -75,7 +76,7 @@ export default {
           this.list = res.data.list;
         },
         (err) => {
-          this.$message.error(err.message);
+          this.$message.error(err.data.message);
         }
       );
     },

@@ -4,8 +4,8 @@ import router from "./router";
 import store from "./store";
 import http from "./utils/http"
 import './style/index'
-import { Button, Menu, MenuItem, Submenu, Image, Card, Form, Input, Avatar, FormItem, DatePicker,Select,Option,Table,TableColumn,Message} from "element-ui";
-const uiCommponets = [Button, Menu, MenuItem, Submenu, Image, Card, Form, Input, Avatar, FormItem, DatePicker,Select,Option,Table,TableColumn];
+import { Button, Menu, MenuItem, Submenu, Image, Card, Form, Input, Avatar, FormItem, DatePicker,Select,Option,Table,TableColumn,Message,Checkbox,Tag,Icon,Dialog,Radio,Popover} from "element-ui";
+const uiCommponets = [Button, Menu, MenuItem, Submenu, Image, Card, Form, Input, Avatar, FormItem, DatePicker,Select,Option,Table,TableColumn,Checkbox,Checkbox,Tag,Icon,Dialog,Radio,Popover];
 Vue.config.productionTip = false;
 uiCommponets.forEach((uiCommponet) => {
   Vue.use(uiCommponet);

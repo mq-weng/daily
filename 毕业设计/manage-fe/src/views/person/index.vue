@@ -8,7 +8,7 @@
         :src="require('@assets/user.jpeg')"
       ></el-avatar>
       <div class="person-content">
-        <div class="user-name">用户名</div>
+        <div class="user-name">{{ userName }}</div>
         <el-menu
           active-text-color="#FFC001"
           style="
@@ -18,6 +18,7 @@
           "
           mode="horizontal"
           :default-active="activeIndex"
+          @select="select"
         >
           <router-link :to="{ name: 'Diray' }"
             ><el-menu-item index="1">日记 </el-menu-item></router-link
@@ -44,10 +45,18 @@
 export default {
   data() {
     return {
-      activeIndex: "1",
+      activeIndex: localStorage.getItem("activeIndex")
+        ? localStorage.getItem("activeIndex")
+        : "1",
+      userName: localStorage.getItem("userName"),
     };
   },
-  
+  methods: {
+    select(index){
+      this.activeIndex = index;
+      localStorage.setItem('activeIndex', index)
+    }
+  },
 };
 </script>
 <style lang="scss">

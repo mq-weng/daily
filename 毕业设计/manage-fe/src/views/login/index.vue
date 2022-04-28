@@ -49,6 +49,8 @@ export default {
           const data = res.data;
           if (data.state == "success") {
             localStorage.setItem("userId", data.id);
+            localStorage.setItem("userName",param.name);
+            localStorage.setItem("token",data.token)
             this.$router.push("/");
           } else {
             this.$message.error(data.message);

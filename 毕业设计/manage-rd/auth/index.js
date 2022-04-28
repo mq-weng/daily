@@ -3,19 +3,24 @@ let jwt = require('jsonwebtoken');
 let secretKey = 'fgbb**';
 module.exports = {
     creatAuthration(playload) {
-        return jwt.sign(playload, secretKey,{ expiresIn: "1h" });
+        return jwt.sign(playload, secretKey,{ expiresIn: "24h" });
     },
 
     async verifyAuthration(ctx, next) {
         if (ctx.header.authorization) {
-            let parts = ctx.header.authorization;
-            let bearer =  parts.split(" ")[0];
-            let token = parts.split(" ")[1];
-            console.log(token)
-            if(/^Bearer$/.test(bearer)){
+            let token = ctx.header.authorization;
+            // console.log("token",token)
+            // let bearer =  parts.split(" ")[0];
+            // let token = parts.split(" ")[1];
+            // console.log(token)
+            // if(/^Bearer$/.test(bearer)){
                 try {
-                    jwt.verify(token, secretKey);
-                    await next();
+                    let user = jwt.verify(token, secretKey);
+                    if(next){
+                        await next();
+                    }
+                    return user;
+ 
                 } catch (err) {
                     ctx.status = 401;
                     ctx.body = {
@@ -24,7 +29,7 @@ module.exports = {
                     }
                     console.log('blog' + err)
                 }
-            }
+            // }
         }
     },
 

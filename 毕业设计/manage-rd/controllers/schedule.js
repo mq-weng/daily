@@ -1,5 +1,6 @@
-const { addSchedule, getSchedule } = require("../models/schedule");
+const { addSchedule, getSchedule ,updateSchedule} = require("../models/schedule");
 let moment = require("moment");
+let { verifyAuthration } = require("../auth/index");
 async function getScheduleList(ctx) {
   const { userId } = ctx.query;
   let results = await getSchedule(userId);
@@ -45,7 +46,26 @@ async function addScheduleList(ctx) {
     };
   }
 }
+async function deleteSchedule(ctx) {
+  verifyAuthration(ctx);
+  const param = ctx.request.body;
+  let { id } = param;
+  let resultes = await updateSchedule(id);
+  console.log(resultes)
+  if (resultes.affectedRows) {
+    ctx.body = {
+      state: "success",
+      message: "成功",
+    };
+  } else {
+    ctx.body = {
+      state: "fail",
+      message: "失败",
+    };
+  }
+}
 module.exports = {
   getScheduleList,
   addScheduleList,
+  deleteSchedule
 };

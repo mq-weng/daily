@@ -34,20 +34,14 @@
       </el-form>
     </div>
     <div>
+      <span style="font-size: 24px; margin-right: 10px">{{
+        calendarDate
+      }}</span>
       <el-button type="primary" size="small" @click="changeToday"
         >今天</el-button
       >
-      <i
-        style="font-size: 30px"
-        class="el-icon-back my-el-icon"
-        @click="movePre"
-      ></i>
-      <i
-        style="font-size: 30px"
-        class="el-icon-right my-el-icon"
-        @click="moveNext"
-      ></i>
-      <!-- <span id="renderRange" class="render-range">{{calendar.getTime()}}</span> -->
+      <i class="el-icon-back my-el-icon" @click="movePre"></i>
+      <i class="el-icon-right my-el-icon" @click="moveNext"></i>
     </div>
     <div id="calendar" style="height: 800px"></div>
   </div>
@@ -55,10 +49,13 @@
 <script lang="ts">
 import Calendar from "tui-calendar"; /* ES6 */
 import "tui-calendar/dist/tui-calendar.css";
+import * as moment from "moment";
 export default {
   data() {
     return {
       calendar: null,
+      scheduleFlag: false,
+      calendarDate: moment(Date.now()).format("YYYY MM"),
       schedules: [],
       newSchedule: {
         id: "",
@@ -74,9 +71,6 @@ export default {
   created() {
     this.getSchedules();
   },
-  // mounted(): void {
-  //   (this as any).init();
-  // },
   beforeDestroy(): void {
     (this as any).calendar.destroy();
     (this as any).calendar = null;
@@ -84,15 +78,21 @@ export default {
   methods: {
     changeToday() {
       this.calendar.today();
-      console.log(this.calendar._renderDate._date)
+      this.calendarDate = moment(this.calendar._renderDate._date).format(
+        "YYYY MM"
+      );
     },
     movePre() {
       this.calendar.prev();
-      console.log(this.calendar._renderDate._date)
+      this.calendarDate = moment(this.calendar._renderDate._date).format(
+        "YYYY MM"
+      );
     },
     moveNext() {
       this.calendar.next();
-      console.log(this.calendar._renderDate._date)
+      this.calendarDate = moment(this.calendar._renderDate._date).format(
+        "YYYY MM"
+      );
     },
     init(): void {
       (this as any).calendar = new Calendar("#calendar", {
@@ -107,29 +107,45 @@ export default {
           },
         },
       });
-      this.calendar.createSchedules(this.schedules); //
-      // this.calendar.on("clickSchedule", function (event:any) {
-      //   var schedule = event.schedule;
-      //   let lastClickSchedule;
-      //   // focus the schedule
-      //   if (lastClickSchedule) {
-      //     this.calendar.updateSchedule(
-      //       lastClickSchedule.id,
-      //       lastClickSchedule.calendarId,
-      //       {
-      //         isFocused: false,
-      //       }
-      //     );
-      //   }
-      //   this.calendar.updateSchedule(schedule.id, schedule.calendarId, {
-      //     isFocused: true,
-      //   });
-
-      //   lastClickSchedule = schedule;
-
-      //   // open detail view
-      // });
+      this.calendar.createSchedules(this.schedules);
+      this.calendar.on("clickSchedule", (event) => {
+        var id = event.schedule.id;
+        if (id) {
+          this.open(id);
+        }
+      });
     },
+    open(id) {
+      this.$confirm("此操作将删除该日程, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.$axios.post("/schedule/deleteSchedule", { id: id }).then(
+            (res) => {
+              this.$message({
+                type: "success",
+                message: "删除成功!",
+              });
+              location.reload();
+            },
+            (err) => {
+              this.$message({
+                type: "error",
+                message: "删除失败!",
+              });
+            }
+          );
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
+    },
+
     getSchedules() {
       //获取日程表,放在 this.schedules 里面
       this.$axios
@@ -173,12 +189,12 @@ export default {
       console.log(this.newSchedule);
     },
   },
-
 };
 </script>
 <style lang="scss">
 .my-el-icon {
   font-size: 32px;
+  margin-left: 10px;
 }
 .my-el-icon:hover {
   color: blue;

@@ -33,10 +33,25 @@
         <el-button @click="add" size="small" type="primary">新建日程</el-button>
       </el-form>
     </div>
+    <div>
+      <el-button type="primary" size="small" @click="changeToday"
+        >今天</el-button
+      >
+      <i
+        style="font-size: 30px"
+        class="el-icon-back my-el-icon"
+        @click="movePre"
+      ></i>
+      <i
+        style="font-size: 30px"
+        class="el-icon-right my-el-icon"
+        @click="moveNext"
+      ></i>
+      <!-- <span id="renderRange" class="render-range">{{calendar.getTime()}}</span> -->
+    </div>
     <div id="calendar" style="height: 800px"></div>
   </div>
 </template>
-
 <script lang="ts">
 import Calendar from "tui-calendar"; /* ES6 */
 import "tui-calendar/dist/tui-calendar.css";
@@ -67,6 +82,18 @@ export default {
     (this as any).calendar = null;
   },
   methods: {
+    changeToday() {
+      this.calendar.today();
+      console.log(this.calendar._renderDate._date)
+    },
+    movePre() {
+      this.calendar.prev();
+      console.log(this.calendar._renderDate._date)
+    },
+    moveNext() {
+      this.calendar.next();
+      console.log(this.calendar._renderDate._date)
+    },
     init(): void {
       (this as any).calendar = new Calendar("#calendar", {
         defaultView: "month",
@@ -131,11 +158,11 @@ export default {
       };
       this.$axios.post("schedule/addScheduleList", param).then(
         (res) => {
-          if(res.data.state == "success"){
-            this.$message.success(res.data.message)
+          if (res.data.state == "success") {
+            this.$message.success(res.data.message);
             location.reload();
-          }else{
-            this.$message.error(res.data.message)
+          } else {
+            this.$message.error(res.data.message);
           }
         },
         (err) => {
@@ -146,5 +173,15 @@ export default {
       console.log(this.newSchedule);
     },
   },
+
 };
 </script>
+<style lang="scss">
+.my-el-icon {
+  font-size: 32px;
+}
+.my-el-icon:hover {
+  color: blue;
+  cursor: pointer;
+}
+</style>

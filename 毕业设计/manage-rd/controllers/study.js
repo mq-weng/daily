@@ -1,4 +1,11 @@
-const { getBook, addBook, updateBook } = require("../models/study");
+const {
+  getBook,
+  addBook,
+  updateBook,
+  getBookDetaile,
+  updateBookDetaile,
+  deleteBook
+} = require("../models/study");
 let { verifyAuthration } = require("../auth/index");
 
 async function getBookList(ctx) {
@@ -45,6 +52,21 @@ async function getBookList(ctx) {
     };
   }
 }
+async function getBookDetaileId(ctx) {
+  let { id } = ctx.query;
+  verifyAuthration(ctx);
+  let resultes = await getBookDetaile(id);
+  if (resultes.length > 0) {
+    ctx.body = {
+      state: "success",
+      list: resultes,
+    };
+  } else {
+    ctx.body = {
+      state: "fail",
+    };
+  }
+}
 async function addBookList(ctx) {
   // 添加书籍 book:{userId,bookName}
   let auth = verifyAuthration(ctx);
@@ -60,14 +82,21 @@ async function addBookList(ctx) {
       };
     }
   );
-  let { bookName } = ctx.request.body;
-  let resultes = await addBook({ userId, bookName });
-  if(resultes.insertId){
+  let { bookName, bookState, curPage, totalPage, author } = ctx.request.body;
+  let resultes = await addBook({
+    userId,
+    bookName,
+    bookState,
+    curPage,
+    totalPage,
+    author,
+  });
+  if (resultes.insertId) {
     ctx.body = {
       state: "success",
       message: "添加书籍成功",
     };
-  }else{
+  } else {
     ctx.body = {
       state: "fail",
       message: "获取失败",
@@ -86,8 +115,50 @@ async function updateBookList(ctx) {
   }
 }
 
+async function updateBookDetaileId(ctx) {
+  verifyAuthration(ctx);
+  let { bookName, bookState, curPage, totalPage, author, id } =
+    ctx.request.body;
+  curPage = parseInt(curPage);
+  totalPage = parseInt(totalPage);
+  let resultes = await updateBookDetaile(
+    id,
+    bookName,
+    bookState,
+    curPage,
+    totalPage,
+    author
+  );
+  if (resultes.affectedRows) {
+    ctx.body = {
+      state: "success",
+      meaaage: "成功",
+    };
+  }
+}
+async function deleteBookList(ctx) {
+  verifyAuthration(ctx);
+  const param = ctx.request.body;
+  let { id } = param;
+  console.log(id)
+  let resultes = await deleteBook(id);
+  if (resultes.affectedRows) {
+    ctx.body = {
+      state: "success",
+      meaaage: "成功",
+    };
+  }else{
+    ctx.body = {
+      state: "fail",
+      meaaage: "失败",
+    };
+  }
+}
 module.exports = {
   getBookList,
   updateBookList,
-  addBookList
+  addBookList,
+  getBookDetaileId,
+  updateBookDetaileId,
+  deleteBookList
 };

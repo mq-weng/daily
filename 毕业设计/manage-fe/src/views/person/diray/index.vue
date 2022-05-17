@@ -21,7 +21,14 @@
             这里可以变好看 
             <div class="">日期</div>
           <div class=""></div> -->
+          <div>{{ item.time }}</div>
           <div v-html="item.content"></div>
+          <el-button
+            size="mini"
+            style="margin-top: 8px"
+            @click="deleteDairy(item.id)"
+            >删除</el-button
+          >
         </el-card>
       </div>
     </div>
@@ -56,12 +63,13 @@ export default {
     getEditorData(): void {
       // 通过代码获取编辑器内容
       let data = this.editor.txt.html();
+      console.log(data)
       let param = { content: data, id: localStorage.getItem("userId") };
       // 提交
       this.$axios.post("/dairy/writeDairy", param).then(
         (res) => {
           this.$message.success(res.data.message);
-          this.editor.txt.html('<p><br></p>'); 
+          this.editor.txt.html("<p><br></p>");
           this.getList();
         },
         (err) => {
@@ -74,6 +82,18 @@ export default {
       this.$axios.get("/dairy/getList", { params: { id: id } }).then(
         (res) => {
           this.list = res.data.list;
+          console.log(this.list);
+        },
+        (err) => {
+          this.$message.error(err.data.message);
+        }
+      );
+    },
+    deleteDairy(id) {
+      this.$axios.post("/dairy/deleteDairy", { id: id }).then(
+        (res) => {
+          this.$message.success("日记删除成功删除");
+          this.getList();
         },
         (err) => {
           this.$message.error(err.data.message);
@@ -113,7 +133,7 @@ export default {
   &-right {
     &-card {
       width: 65vw;
-      height: 170px;
+      min-height: 100px;
       overflow: hidden;
       text-overflow: ellipsis;
       margin-bottom: 8px;

@@ -48,7 +48,7 @@
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="centerDialogVisible = false">取 消</el-button>
+          <el-button @click="cancel">取 消</el-button>
           <el-button type="primary" @click="addCourse">确 定</el-button>
         </span>
       </el-dialog>
@@ -59,24 +59,59 @@
         <div class="want-read">
           <div class="read-title">想读</div>
           <el-card class="read-card">
-            <el-checkbox
-              v-for="item in list0"
-              :key="item.id"
-              @change="changeReading(item.id)"
-              >{{ item.bookName }}</el-checkbox
-            >
+            <div v-for="item in list0" :key="item.id">
+              <el-checkbox @change="changeReading(item.id)">{{
+                item.bookName
+              }}</el-checkbox>
+              <router-link :to="{ path: '/detaile', query: { id: item.id } }"
+                >详情</router-link
+              >
+            </div>
             <div class="read-type">
               <!-- <el-tag size="mini">类型</el-tag> -->
             </div>
           </el-card>
-          <el-input placeholder="请输入书名" v-model="bookName"></el-input>
+          <!-- <el-input placeholder="请输入书名" v-model="bookName"></el-input> -->
           <el-button
             size="mini"
             type="primary"
             icon="el-icon-plus"
-            @click="addBook"
+            @click="dialogVisible = true"
             >添加</el-button
           >
+          <el-dialog :visible.sync="dialogVisible" width="30%" center>
+            <el-form ref="form" :model="form" label-width="80px">
+              <div class="detaile-dialog-title">基本信息</div>
+              <el-form-item label="书名">
+                <el-input v-model="form.bookName"></el-input>
+              </el-form-item>
+              <el-form-item label="作者">
+                <el-input v-model="form.author"></el-input>
+              </el-form-item>
+              <div class="detaile-dialog-title">进度信息</div>
+              <el-form-item label="当前页数">
+                <el-input v-model="form.curPage"></el-input>
+              </el-form-item>
+              <el-form-item label="总页数">
+                <el-input v-model="form.totalPage"></el-input>
+              </el-form-item>
+              <el-form-item label="阅读状态">
+                <el-select v-model="form.bookState" placeholder="请选择">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="cancel">取 消</el-button>
+              <el-button type="primary" @click="addBook">确 定</el-button>
+            </span>
+          </el-dialog>
         </div>
         <div class="reading">
           <div class="read-title">在读</div>
@@ -85,7 +120,9 @@
               <el-checkbox @change="changeReaded(item.id)">{{
                 item.bookName
               }}</el-checkbox>
-              <router-link :to="{path:'/detaile',query: {id:item.id}}" >详情</router-link>
+              <router-link :to="{ path: '/detaile', query: { id: item.id } }"
+                >详情</router-link
+              >
             </div>
             <div class="read-type">
               <!-- <el-tag size="mini">类型</el-tag> -->
@@ -95,9 +132,14 @@
         <div class="readed">
           <div class="read-title">读过</div>
           <el-card class="read-card">
-            <el-checkbox v-for="item in list2" :key="item.id" disabled>{{
-              item.bookName
-            }}</el-checkbox>
+            <div v-for="item in list2" :key="item.id">
+              <el-checkbox :key="item.id" disabled>{{
+                item.bookName
+              }}</el-checkbox>
+              <router-link :to="{ path: '/detaile', query: { id: item.id } }"
+                >详情</router-link
+              >
+            </div>
             <div class="read-type">
               <!-- <el-tag size="mini">类型</el-tag> -->
             </div>
@@ -115,27 +157,8 @@ export default {
       list0: [],
       list1: [],
       list2: [],
-      bookName: "",
-      tableData: [
-        // {
-        //   id: 0,
-        //   courseName: "2016-05-02",
-        //   courseProgress: "王小虎",
-        //   courseOrigin: "上海市普陀区金沙江路 1518 弄",
-        // },
-        // {
-        //   id: 1,
-        //   courseName: "2016-05-04",
-        //   courseProgress: "王小虎",
-        //   courseOrigin: "上海市普陀区金沙江路 1517 弄",
-        // },
-        // {
-        //   id: 2,
-        //   courseName: "2016-05-01",
-        //   courseProgress: "王小虎",
-        //   courseOrigin: "上海市普陀区金沙江路 1519 弄",
-        // },
-      ],
+      // bookName: "",
+      tableData: [],
       dialogTitle: "编辑课程",
       centerDialogVisible: false,
       formLabelAlign: {
@@ -143,6 +166,28 @@ export default {
         courseOrigin: "",
         courseProgress: "",
       },
+      form: {
+        bookName: "",
+        author: "",
+        bookState: "",
+        curPage: 0,
+        totalPage: 0,
+      },
+      options: [
+        {
+          value: "0",
+          label: "想读",
+        },
+        {
+          value: "1",
+          label: "在读",
+        },
+        {
+          value: "2",
+          label: "已读完",
+        },
+      ],
+      dialogVisible: false,
       id: 0,
     };
   },
@@ -186,6 +231,7 @@ export default {
       console.log("param", param);
       this.$axios.post(url, param).then(
         (res) => {
+          this.cancel();
           this.getCourse();
         },
         (err) => {
@@ -212,16 +258,8 @@ export default {
         }
       );
     },
-    getBook() {
-      this.$axios.get("/study/getBookList").then((res) => {
-        let data = res.data;
-        // 这里记得返回 id 来获取书籍详情
-        this.list0 = data.list0;
-        this.list1 = data.list1;
-        this.list2 = data.list2;
-      });
-    },
     changeReading(id) {
+      console.log(id)
       this.updateBookList(1, id);
     },
     changeReaded(id) {
@@ -242,17 +280,50 @@ export default {
         }
       );
     },
+    getBook() {
+      this.$axios.get("/study/getBookList").then((res) => {
+        console.log(res.data);
+        let data = res.data;
+        // 这里记得返回 id 来获取书籍详情
+        this.list0 = data.list0;
+        this.list1 = data.list1;
+        this.list2 = data.list2;
+      });
+    },
     addBook() {
-      this.$axios.post("/study/addBookList", { bookName: this.bookName }).then(
+      if(this.form.curPage == this.form.totalPage){
+        this.form.bookState = 2;
+      }
+      this.$axios.post("/study/addBookList", this.form).then(
         (res) => {
+          this.dialogVisible = false;
           this.$message.success(res.data.message);
           this.getBook();
-          this.bookName = "";
+          this.cancelForm();
         },
         (err) => {
           console.log(err);
         }
       );
+    },
+    cancelForm() {
+      this.form = {
+        bookName: "",
+        author: "",
+        bookState: "",
+        curPage: 0,
+        totalPage: 0,
+      };
+      this.formLabelAlign = {
+        courseName: "",
+        courseOrigin: "",
+        courseProgress: "",
+      };
+    },
+    cancel() {
+      this.dialogVisible = false;
+      this.centerDialogVisible = false;
+      this.cancelForm();
     },
   },
   created() {

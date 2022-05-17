@@ -121,9 +121,9 @@
             width="180"
           ></el-table-column>
           <el-table-column prop="date" label="日期"></el-table-column>
-          <el-table-column prop="classAccount" label="收支类型" width="180">
+          <el-table-column prop="classAccount" label="收支类别" width="180">
             <template slot-scope="scope">
-              {{ classAccountConfig[scope.row.classAccount] }}
+              {{ classAccountConfig[scope.row.classAccount - 1] }}
             </template>
           </el-table-column>
           <el-table-column prop="desc" label="备注"></el-table-column>
@@ -325,7 +325,9 @@ export default {
           this.tableData = data.tableData;
           let echartsData0 = data.data.expand;
           let echartsData1 = data.data.income;
+          console.log(data.monthNumber);
           if (data.monthNumber != 0) {
+            this.option.xAxis.data = [];
             for (let i = 1; i <= data.monthNumber; i++) {
               this.option.xAxis.data[i - 1] = i;
               this.option.series[0].data[i - 1] = 0;
@@ -337,6 +339,7 @@ export default {
                 ? echartsData1[i]
                 : 0;
             }
+            myChart.setOption(this.option);
           } else {
             this.option.xAxis.data = [];
             this.option.series[0].data = [];
@@ -352,9 +355,8 @@ export default {
                 ? echartsData1[i]
                 : 0;
             }
+            myChart.setOption(this.option);
           }
-
-          myChart.setOption(this.option);
         },
         (err) => {
           console.log(err);
